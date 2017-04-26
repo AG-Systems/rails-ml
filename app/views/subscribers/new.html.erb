@@ -1,0 +1,55 @@
+<br>
+<div class="container">
+    <div class="card">
+      <img src="http://wallpapercave.com/wp/qb4Ddyc.jpg" alt="Avatar" style="width:100%" >
+      <div class="container">
+        <h2>Premium</h2>
+        <%= render 'form' %>
+      </div>
+    </div>
+</div>
+<br>
+<hr>
+<div id="continue">
+    <a href="/"><button class="btn btn-primary">Continue as free user</button></a>
+</div>
+
+<style>
+    #continue
+    {
+        margin: 0 auto;
+        text-align:center;
+        font-size: 25px;
+    }
+    .btn-primary
+    {
+        font-size: 24px;
+    }
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 350px;
+        margin: 0 auto;
+    }
+    
+    /* On mouse-over, add a deeper shadow */
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    
+    /* Add some padding inside the card container */
+    .container {
+        padding: 2px 16px;
+        margin: 0 auto;
+    }
+    h2
+    {
+        color: black;
+    }
+    img
+    {
+         width: 350px; 
+         height: 218px;
+    }
+</style>

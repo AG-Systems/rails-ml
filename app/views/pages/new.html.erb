@@ -1,0 +1,31 @@
+ <br>
+		<div id="main"> 
+       <%= form_for(@ad) do |f| %>
+         <ul>
+            <% @ad.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+            <% end %>
+         </ul>
+         <div id="main">
+            <div class="card">
+               <div class="card-block">
+                  <p>Title</p>
+                  <h4 class="card-title">
+                     <%= f.text_field :title, :required => true %>
+                  </h4>
+               </div>
+                  <%= f.file_field :image, accept:'image/*' %>
+                  <% if f.object.image? %>
+                    <%= image_tag f.object.image.thumb.url %>
+                    <%= f.label :remove_image %>
+                    <%= f.check_box :remove_image %> 
+                  <% end %>         
+            </div>
+         </div>
+         <br>
+         <p>
+            <%= f.submit "Submit ad", :class => 'btn btn-success' %>
+         </p>
+         <%= f.hidden_field :author, value: current_user.email %>
+         <% end %>
+      </div>
