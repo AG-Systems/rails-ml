@@ -21,7 +21,7 @@ class Post extends React.Component {
                 <div className="container-images">
                     <h4><b>{this.props.title}</b></h4> 
                     <p>{this.state.feedback}</p> 
-                    <p>Rating: {this.props.rating}</p>
+                    <p>Rating: {this.props.rating}/10</p>
                 </div>
             </div>
         </div>
