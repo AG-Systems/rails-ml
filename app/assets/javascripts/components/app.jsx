@@ -19,8 +19,10 @@ class Post extends React.Component {
             <div className="card-images">
                 <img src={this.props.image} alt={this.props.title} id="ad-image"/>
                 <div className="container-images">
-                    <h4><b>{this.props.title}</b></h4> 
-                    <p>{this.state.feedback}</p> 
+                    <h3><b>{this.props.title}</b></h3>
+                    {this.state.feedback.split("\n").map(i => {
+                          return <p>{i}</p>;
+                    })}
                     <hr/>
                     <p><b>Image Recognition:</b></p>
                     <p>{this.props.analysis}</p>

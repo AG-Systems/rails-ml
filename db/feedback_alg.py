@@ -2,6 +2,8 @@ import sys
 from PIL import Image, ImageStat
 from colorthief import ColorThief
 import tensorflow as tf
+# from tesseract import image_to_string
+import pytesser
 
 results = ""
 imgurl = str(sys.argv[1])
@@ -29,3 +31,45 @@ with Image.open(imgurl) as img:
     width, height = img.size
     if width <= 240 and height <= 240:
         print "Please increase image side"
+    elif width == 300 and height == 250:
+        print("Your ad is top performing ad size")
+        print("Ad style: Medium Rectangle")
+        print("Performs well when embedded within text content or at the end of articles.")
+        print("Used for: Desktop")
+    elif width == 336 and height == 280:
+        print("Your ad is top performing ad size")
+        print("Ad style: Large Rectangle")
+        print("Performs well when embedded within text content or at the end of articles.")
+        print("Used for: Desktop")
+    elif width >= 500 and height <= 100:
+        print("Your ad is top performing ad size")
+        print("Ad style: Leaderboard")
+        print("Performs well if placed above main content, and on forum sites.")
+        print("Used for: Desktop")
+    elif width == 300 and height == 600:
+        print("Your ad is top performing ad size")
+        print("Ad style: Half Page")
+        print("Its currently really effective.")
+        print("Used for: Desktop")
+    elif width <= 320 and height == 100:
+        print("Your ad is top performing ad size")
+        print("Ad style: Large Mobile Banner")
+        print("Top rated mobile ad")
+        print("Used for: Mobile")
+        
+    elif width == 320 and height == 50:
+        print("Ad style: Mobile Leaderboard")
+        print("These ads have been shown to work well as a large smartphone ad format, particularly when used at the bottom of a page")
+        print("Used for: Mobile")
+
+    elif width >= 400 and height == 60 and width <= 499:
+        print("Ad style: Banner")
+        print("The supply of available display ads for this ad size is generally limited though, which may lead to sub-optimal ad performance.")
+        print("Used for: Desktop")
+        
+txt = pytesser.image_to_string(imgurl)
+print("\n")
+print("The amount of text on your ad is: " + str(len(txt)))
+print("\n")
+txt = txt.replace('\n', ' ').replace('\r', '')
+print("Detected text: " + str(txt))

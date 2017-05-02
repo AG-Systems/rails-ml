@@ -39,6 +39,7 @@ imgurl = str(sys.argv[1])
 score += detect_color_image(imgurl)
 color_thief = ColorThief(imgurl)
 rgb = color_thief.get_color(quality=1)
+
 print(score)
 
 
