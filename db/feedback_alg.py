@@ -70,7 +70,7 @@ with Image.open(imgurl) as img:
 txt = pytesser.image_to_string(imgurl)
 txt = txt.replace('\n', ' ').replace('\r', '')
 print("\n")
-print("The amount of text on your ad is: " + str(len(txt)) + "characters")
+print("The amount of text on your ad is: " + str(len(txt)) + " characters")
 print("\n")
 print("Detected text: " + str(txt))
 
