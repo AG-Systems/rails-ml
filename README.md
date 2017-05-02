@@ -1,18 +1,28 @@
-To Do:
+libs:
 
-Make trailer video
+Python dependencies:
 
-Make actual content [video 1 done]
 
-Make support page [done kinda]
+Tensorflow
 
-Make about page 
+Sklearn
 
-Make it secure [can be done]
+Pandas
 
-Make it so you must pay to access all of the content [done]
+scipy
 
-Launch it [done]
+pillow
 
-Market it (give out free accounts, instagram, reddit, youtube) [Done. Need to make the front page better]
+colorthief
+
+updated version of pip
+
+
+Linux dependencies:
+
+
+tesseract-ocr
+
+
+
 
