@@ -3,6 +3,7 @@ import os
 from PIL import Image, ImageStat
 from colorthief import ColorThief
 import tensorflow as tf
+import pytesser
 
 score = 0
 
@@ -34,12 +35,19 @@ def detect_color_image(file, thumb_size=40, MSE_cutoff=22, adjust_color_bias=Tru
         color_score -= 1
     return color_score
 
-calltoaction = ["start", "Stop","Build","Join","Learn","Discover","You", "Me", "My", "Want", "Need", "Free", "Save", "Try"]
+calltoaction = ["start", "stop","build","join","learn","discover","you", "me", "my", "want", "need", "free", "save", "try", "you"]
 imgurl = str(sys.argv[1])
 score += detect_color_image(imgurl)
 color_thief = ColorThief(imgurl)
 rgb = color_thief.get_color(quality=1)
 
+txt = pytesser.image_to_string(imgurl)
+txt = txt.replace('\n', ' ').replace('\r', '')
+txt = txt.split()
+for x in txt:
+    if x.lower() in calltoaction:
+        score += 1
+        break
 print(score)
 
 
