@@ -5,10 +5,11 @@
 <% else %>
 <!-- NOT PAID -->
 <br>
-		<%= render :template => "pages/new" %>
+	<%= render :template => "pages/new" %>
 		<% @images.where(author:  current_user.email).each do |ad| %>
-			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
-		<% end %>
+		<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating, analysis: ad.recon}, {prerender: true}) %>
+	<% end %>
+
 
 <% end %>
 <% else %>
@@ -35,8 +36,8 @@
 		<div class="container">
 			<div id="home-row-1" class="row clearfix">
 				<div class="col-12">
-					<h1 class="font-semibold">CONFIDENT <span class="font-thin">MINDSET</span></h1>
-					<h4 class="font-thin">Weekly <span class="font-semibold">premium videos to improve your </span> life.</h4>
+					<h1 class="font-semibold">TECH<span class="font-thin"> AURIGA</span></h1>
+					<h4 class="font-thin">Get feedback<span class="font-semibold"> on your online advertisements </span></h4>
 					<br>
 					<br>
 					<a href="/users/sign_up"><button type="button" class="btn btn-primary" style="font-size:20px;">Start Today For Free</button></a>
@@ -50,96 +51,6 @@
 			</div>  --><!-- /row -->
 		</div><!-- /container -->
 	</div><!-- /slide1 -->
-
-		<!-- === Slide 3 === -->
-	<div class="slide story" id="slide-3" data-slide="2">
-		<div class="container">
-			<div class="row title-row">
-				<div class="col-12 font-thin">Steps to <span class="font-semibold">success</span> </div>
-			</div><!-- /row -->
-			<div class="row subtitle-row">
-<div class="list-group">
-  <a class="list-group-item active">
-    <h2 class="list-group-item-heading">Watch the tutorials</h2>
-    <p class="list-group-item-text">You will receive a video per week</p>
-  </a>
-</div>
-<br>
-<div class="list-group">
-  <a class="list-group-item active">
-    <h2 class="list-group-item-heading">Follow the exercises</h2>
-    <p class="list-group-item-text">Think of it as daily goals</p>
-  </a>
-</div>
-<br>
-<div class="list-group">
-  <a class="list-group-item active">
-    <h2 class="list-group-item-heading">Results</h2>
-    <p class="list-group-item-text">See great results</p>
-  </a>
-</div>
-			</div><!-- /row -->
-      
-		</div><!-- /container -->
-	</div><!-- /slide3 -->
-
-	<!-- === Slide 2 === -->
-	<div class="slide story" id="slide-2" data-slide="2">
-		<div class="container">
-			<div class="row title-row">
-				<div class="col-12 font-thin">What will you receive <span class="font-semibold"> </span>  </div>
-			</div>
-			<br>
-			<div class="row line-row">
-				<div class="hr">&nbsp;</div>
-			</div><!-- /row -->
-			<div class="row subtitle-row">
-				<div class="col-12 font-thin"> <span class="font-semibold">Benefits</span></div>
-			</div><!-- /row -->
-			<div class="row content-row">
-				<div class="col-12 col-lg-3 col-sm-6">
-					<p><i class="icon icon-eye-open"></i></p>
-					<h2 class="font-thin"> <span class="font-semibold">Relationships</span></h2>
-					<h4 class="font-thin">Build stronger relationships. Make more friends, build powerful connections, be more attractive and have fun while doing it. </h4>
-				</div><!-- /col12 -->
-				<div class="col-12 col-lg-3 col-sm-6">
-					<p><i class="icon icon-laptop"></i></p>
-					<h2 class="font-thin">Self <span class="font-semibold">Happiness</span></h2>
-					<h4 class="font-thin">You will learn how to love your body. Your self happiness will increase exponentially.</h4>
-				</div><!-- /col12 -->
-				<div class="col-12 col-lg-3 col-sm-6">
-					<p><i class="icon icon-tablet"></i></p>
-					<h2 class="font-thin"> Career <span class="font-semibold">Success</span></h2>
-					<h4 class="font-thin">Being confident has a strong correlation on being succesful. Have the drive to start things, ability to standup for yourself, destroy your fears, and believe in themselves.</h4>
-				</div><!-- /col12 -->
-				<div class="col-12 col-lg-3 col-sm-6">
-					<p><i class="icon icon-pencil"></i></p>
-					<h2 class="font-semibold">Fearless</h2>
-					<h4 class="font-thin">Imagine being fearless. How good would that feel? With our help, we can get you to that level.</h4>
-				</div><!-- /col12 -->
-			</div><!-- /row -->
-		</div><!-- /container -->
-	</div><!-- /slide2 -->
-<!-- 
-<div id="aboutme">
-  <br>
-<div class="featurette" id="about">
-            <img class="featurette-image img-circle img-responsive pull-right" src="../profilepicture.jpg">
-            <h2 class="featurette-heading">Who am I
-                <span class="text-muted"></span>
-            </h2>
-            <br>
-              <p class="lead">Hello my name is Max and this is my story. <br>
-              Not many people know this but I used to be a huge shy guy. <br>
-              With a lot of hardwork and practice, I learned on how to build confidence <br>
-              I built Confident Mindset to help others struggling and not make the <br>
-              same mistakes as I was when I first started. I want everyone to be the best. <br>
-              
-              </p>
-        </div>
-        <br>
-</div>
--->
 <div id="free-list">
   <br>
   <h2> Start Today </h2>
@@ -150,10 +61,10 @@
 	</div>
 <ul class="list-group">
   <li class="list-group-item">Free forever</li>
-  <li class="list-group-item ">New weekly content</li>
-  <li class="list-group-item">Become the new you</li>
-  <li class="list-group-item">Be more successful</li>
-  <li class="list-group-item">Easy to start </li>
+  <li class="list-group-item ">Get feedback on your ads by machine learning</li>
+  <li class="list-group-item">See how your ad compares others</li>
+  <li class="list-group-item"></li>
+  <li class="list-group-item"></li>
 </ul>
 <br>
 <div class="frontpage">
@@ -168,15 +79,15 @@
   <h2> Premium </h2>
   <div class="cd-price">
 						<span class="cd-currency">$</span>
-						<span class="cd-value">10</span>
+						<span class="cd-value">20</span>
 						<span class="cd-duration">/mo</span>
 	</div>
 <ul class="list-group">
-  <li class="list-group-item">Full access</li>
-  <li class="list-group-item">New videos added weekly</li>
+  <li class="list-group-item">Everything above</li>
+  <li class="list-group-item">Get professional humman feedback as well</li>
   <li class="list-group-item">24/7 Support</li>
   <li class="list-group-item">Cancel anytime</li>
-  <li class="list-group-item">Premium content</li>
+  <li class="list-group-item"></li>
 </ul>
 <br>
 <div class="frontpage">

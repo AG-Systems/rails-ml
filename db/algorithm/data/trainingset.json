@@ -1,7 +1,7 @@
 {
 	"image_format": "jpg",
-	"width": 800,
-	"height": 600,
+	"width": 240,
+	"height": 240,
 	"dump_dir": "output/train_images",
 	"image_dest": "output/TFtrain.images",
 	"label_dest": "output/TFtrain.labels",

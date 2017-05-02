@@ -1,4 +1,5 @@
 import sys
+import os
 from PIL import Image, ImageStat
 from colorthief import ColorThief
 import tensorflow as tf
@@ -6,6 +7,7 @@ import tensorflow as tf
 score = 0
 
 def detect_color_image(file, thumb_size=40, MSE_cutoff=22, adjust_color_bias=True):
+    color_score = 0
     pil_img = Image.open(file)
     bands = pil_img.getbands()
     if bands == ('R','G','B') or bands== ('R','G','B','A'):
@@ -21,26 +23,23 @@ def detect_color_image(file, thumb_size=40, MSE_cutoff=22, adjust_color_bias=Tru
         if MSE <= MSE_cutoff:
             print "grayscale\t",
         else:
-            score += 2
+            color_score += 2
             #print "Color\t\t\t",
         #print "( MSE=",MSE,")"
     elif len(bands)==1:
         # print "Black and white", bands
-        score += 1
+        color_score += 1
     else:
         #print "Don't know...", bands
-        score -= 1
+        color_score -= 1
+    return color_score
 
 calltoaction = ["start", "Stop","Build","Join","Learn","Discover","You", "Me", "My", "Want", "Need", "Free", "Save", "Try"]
 imgurl = str(sys.argv[1])
-detect_color_image(imgurl)
+score += detect_color_image(imgurl)
 color_thief = ColorThief(imgurl)
 rgb = color_thief.get_color(quality=1)
-if rgb[-1] > rgb[0] and rgb[-1] > rgb[1]:
-    score += 1
-    # blue is considered the most favorite color
 print(score)
-
 
 
 # Blacks most common association is power, authority and strength

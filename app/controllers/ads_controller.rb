@@ -12,10 +12,10 @@ class AdsController < ApplicationController
       @ad = Ad.new(post_params)
       @ad.save
       image_path = "public/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}"
-      #result = `python db/classify_image.py --image_file #{image_path}`
+      classify = `python db/classify_image.py --image_file #{image_path}`
       result = `python db/feedback_alg.py  #{image_path}`
       ad_rating = `python db/rating_alg.py #{image_path}`
-      @ad.update_attributes(:feedback => result, :rating => ad_rating)
+      @ad.update_attributes(:feedback => result, :rating => ad_rating, :recon => classify)
       redirect_to :action => :index
       #redirect_to ads_path(@ad)
   end

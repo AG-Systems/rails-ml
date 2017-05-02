@@ -8,7 +8,7 @@ class Post extends React.Component {
   }
   componentDidMount() 
   {
-      this.setState({feedback: this.props.feed}, function () 
+      this.setState({feedback: this.props.feed}, function() 
       {
           console.log(this.state.feedback);
       });   
@@ -21,6 +21,10 @@ class Post extends React.Component {
                 <div className="container-images">
                     <h4><b>{this.props.title}</b></h4> 
                     <p>{this.state.feedback}</p> 
+                    <hr/>
+                    <p><b>Image Recognition:</b></p>
+                    <p>{this.props.analysis}</p>
+                    <hr/>
                     <p>Rating: {this.props.rating}/10</p>
                 </div>
             </div>

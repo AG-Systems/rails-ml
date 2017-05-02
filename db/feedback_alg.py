@@ -23,3 +23,9 @@ if rgb[0] < 200 and rgb[1] > 150 and rgb[2] < 100:
     print "Green has one of the most positive effect compared to other colors. Use this color to show health, rest, and to relieve stress"
 if rgb[0] < 100 and rgb[1] > 100 and rgb[2] > 100:
     print "Blue is a really safe color. Its known for trust and reliabilty. Color blindess is also not affected by blue"
+
+
+with Image.open(imgurl) as img:
+    width, height = img.size
+    if width <= 240 and height <= 240:
+        print "Please increase image side"
