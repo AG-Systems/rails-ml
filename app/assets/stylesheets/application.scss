@@ -295,10 +295,13 @@
         right: 0;
         bottom: 0;
         top: 0;
-        margin: 0;  
-        background: #00C9FF; /* fallback for old browsers */
-        background: -webkit-linear-gradient(to left, #00C9FF , #92FE9D); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to left, #00C9FF , #92FE9D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        margin: 0; 
+        /*
+        background: #00C9FF; 
+        background: -webkit-linear-gradient(to left, #00C9FF , #92FE9D); 
+        background: linear-gradient(to left, #00C9FF , #92FE9D);
+        */
+        background-color: white;
           
 }
 .list-group
@@ -670,6 +673,7 @@ body {
 #slide-1 {
 	background-image: url('../bg1.jpg');
 	color: #ffffff;
+	height: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -1209,7 +1213,7 @@ ul li
     margin: 0 auto;
     width: 35%;
     min-width: 300px;
-    padding-top: 20px;
+    /*padding-top: 20px; */
     padding-bottom: 20px;
 }
 
@@ -1227,4 +1231,22 @@ ul li
 {
 	width: 100%;
 	height: 100%;
+}
+
+.navbar-nav > li > a
+{
+	padding-top: 7px;
+	padding-bottom: 0px;
+}
+
+#infomation
+{
+	width: 100%;
+	background-color: white;
+	min-height: 500px;
+}
+
+.thumbnail
+{
+	text-align: center;
 }

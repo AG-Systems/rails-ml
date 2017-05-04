@@ -25,7 +25,9 @@ class Post extends React.Component {
                     })}
                     <hr/>
                     <p><b>Image Recognition:</b></p>
-                    <p>{this.props.analysis}</p>
+                    {this.props.analysis.split("\n").map(i => {
+                          return <p>{i}</p>;
+                    })}
                     <hr/>
                     <p>Rating: {this.props.rating}/10</p>
                 </div>

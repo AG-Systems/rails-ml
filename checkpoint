@@ -1,0 +1,3 @@
+model_checkpoint_path: "/home/ubuntu/workspace/model_cat_dog_6_final.tflearn"
+all_model_checkpoint_paths: "/home/ubuntu/workspace/model_cat_dog_6.tflearn-0"
+all_model_checkpoint_paths: "/home/ubuntu/workspace/model_cat_dog_6_final.tflearn"

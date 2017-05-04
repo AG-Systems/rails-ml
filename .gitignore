@@ -15,3 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+#Ignore the saved images
+/public/uploads/ad/image/*
