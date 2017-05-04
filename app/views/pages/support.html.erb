@@ -1,0 +1,55 @@
+<body>
+  
+  <h1>FAQs</h1>
+  <p>Personal email: maxchakhmatov@gmail.com</p>
+  <p>Current stage: <b>Alpha</b></p>
+  <section class="box">
+    It says I have a very low rating
+  </section>
+  <section class="draw">
+    <p>The rating system still needs a lot of work. Please stay tuned.</p>
+  </section>
+  
+  <section class="box">
+   How do I use this tool?
+  </section>
+  <section class="draw">
+   <p>1) You upload an ad</p>
+   <p>2) You set a title</p>
+   <p>3) Click upload</p>
+   <p>4) Wait as the algorithm processes your ad</p>
+   <p>5) Sucesss</p>
+  </section>
+  
+  <section class="box">
+   How many people on working on this project?
+  </section>
+  <section class="draw">
+   <p>Just me for now</p>
+  </section>
+</body>
+
+<style>
+
+body {
+  font-family: "helvetica neue", helvetica, sans-serif;
+}
+.box  {
+  background: #e67e22;
+  color: white;
+  padding: 20px;
+}
+.draw {
+  display: none;
+  background: white;
+  border: 1px solid #c3c3c3;
+  padding: 20px;
+}
+</style>
+
+<script>
+    $(".box").click(function(){
+  $(this).next().slideToggle("fast");
+});  
+
+</script>

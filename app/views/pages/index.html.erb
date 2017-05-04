@@ -6,6 +6,9 @@
 <!-- NOT PAID -->
 <br>
 	<%= render :template => "pages/new" %>
+	<br/>
+	<h4 style="text-align: center;">Current stage: <b>Alpha</b></h4>
+	<br/>
 		<% @images.where(author:  current_user.email).each do |ad| %>
 		<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating, analysis: ad.recon}, {prerender: true}) %>
 	<% end %>
@@ -40,7 +43,7 @@
 					<h4 class="font-thin">Get <span class="font-semibold"> instant feedback </span> on your online advertisements </h4>
 					<br>
 					<br>
-					<a href="/users/sign_up"><button type="button" class="btn btn-primary" style="font-size:20px;">Start Today For Free</button></a>
+					<a href="/users/sign_up"><button type="button" class="btn btn-primary" style="font-size:22px;">Start Today For Free</button></a>
 				</div><!-- /col-12 -->
 			</div><!-- /row -->
 			<!-- 
@@ -57,7 +60,7 @@
                     <h3><b>Insert your ad here</b></h3>
 										<p>By using machine learning, our algorithm will give you instant feedback on your ads</p>
                     <hr/>
-                    <p>Rating: 0/10</p>
+                    <p>Rating of ad: <b>10/10</b></p>
              </div>
           </div>
 		</div><!-- /container -->
