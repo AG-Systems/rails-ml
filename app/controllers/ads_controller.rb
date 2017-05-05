@@ -15,6 +15,10 @@ class AdsController < ApplicationController
       classify = `python db/classify_image.py --image_file #{image_path}`
       result = `python db/feedback_alg.py  #{image_path}`
       ad_rating = `python db/rating_alg.py #{image_path}`
+      if classify.length >= 50
+          #temp = classif.index('bytes.')
+          classify.slice(s.index("bytes.")..-1)
+      end
       @ad.update_attributes(:feedback => result, :rating => ad_rating, :recon => classify)
       redirect_to :action => :index
       #redirect_to ads_path(@ad)
