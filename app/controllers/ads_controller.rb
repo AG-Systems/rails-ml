@@ -12,7 +12,11 @@ class AdsController < ApplicationController
       @ad = Ad.new(post_params)
       @ad.save
       image_path = "public/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}"
-      classify = `python db/classify_image.py --image_file #{image_path}`
+      begin
+        classify = `python db/classify_image.py --image_file #{image_path}`
+      rescue
+        classify = "Image must be a jpg for image recognition to work. Stay tuned!"
+      end
       result = `python db/feedback_alg.py  #{image_path}`
       ad_rating = `python db/rating_alg.py #{image_path}`
       if classify.length >= 50
