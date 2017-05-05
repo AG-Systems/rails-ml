@@ -25,4 +25,12 @@ tesseract-ocr
 
 
 
+For heroku:
+
+heroku pg:reset DATABASE --app APP
+
+heroku run --app techauriga rake db:schema:load
+
+heroku run --app techauriga rake db:migrate
+
 
