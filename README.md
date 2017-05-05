@@ -29,8 +29,8 @@ For heroku:
 
 heroku pg:reset DATABASE --app APP
 
-heroku run --app techauriga rake db:schema:load
+heroku run --app APP rake db:schema:load
 
-heroku run --app techauriga rake db:migrate
+heroku run --app APP rake db:migrate
 
 
