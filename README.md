@@ -3,34 +3,40 @@ libs:
 Python dependencies:
 
 
-Tensorflow
+      Tensorflow
 
-Sklearn
+      Sklearn
 
-Pandas
+      Pandas
 
-scipy
+      scipy
 
-pillow
+      pillow
 
-colorthief
+      colorthief
 
-updated version of pip
+      updated version of pip
 
 
 Linux dependencies:
 
 
-tesseract-ocr
+    tesseract-ocr
 
 
 
 For heroku:
 
-heroku pg:reset DATABASE --app APP
+    heroku pg:reset DATABASE --app APP
 
-heroku run --app APP rake db:schema:load
+    heroku run --app APP rake db:schema:load
 
-heroku run --app APP rake db:migrate
+    heroku run --app APP rake db:migrate
 
+    heroku buildpacks:add https://github.com/oswellchan/heroku-buildpack-tesseract
+    
+    1) Python
+    
+    2) Custom buildpack
 
+    3) Ruby
