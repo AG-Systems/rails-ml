@@ -14,9 +14,9 @@ class AdsController < ApplicationController
       @ad = Ad.new(post_params)
       @ad.save
       s3_path = "https://techauriga.s3.amazonaws.com/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}"
-      Dir.mkdir("public/uploads/ad/image/#{@ad[:id]}")
-      IO.copy_stream(open(s3_path), "public/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}")
-      image_path = "public/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}"
+      Dir.mkdir("public/uploads/#{@ad[:id]}")
+      IO.copy_stream(open(s3_path), "public/uploads/#{@ad[:id]}/#{@ad[:image]}")
+      image_path = "public/uploads/#{@ad[:id]}/#{@ad[:image]}"
       print "------------------------------->"
       print @ad[:image]
       begin
