@@ -10,7 +10,7 @@
 	<h4 style="text-align: center;">Current stage: <b>Alpha</b></h4>
 	<br/>
 		<% @images.where(author:  current_user.email).each do |ad| %>
-		<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating, analysis: ad.recon}, {prerender: true}) %>
+		<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating, analysis: ad.image.url}, {prerender: true}) %>
 	<% end %>
 
 
