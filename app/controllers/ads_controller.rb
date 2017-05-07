@@ -13,12 +13,11 @@ class AdsController < ApplicationController
   def create
       @ad = Ad.new(post_params)
       @ad.save
+      @ad.update_attributes(:feedback => "", :rating => "", :recon => "") #if image upload fails
       s3_path = "https://techauriga.s3.amazonaws.com/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}"
       Dir.mkdir("public/uploads/#{@ad[:id]}")
       IO.copy_stream(open(s3_path), "public/uploads/#{@ad[:id]}/#{@ad[:image]}")
       image_path = "public/uploads/#{@ad[:id]}/#{@ad[:image]}"
-      print "------------------------------->"
-      print @ad[:image]
       begin
         #classify = `python db/classify_image.py --image_file #{image_path}`
         classify = "test"

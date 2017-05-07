@@ -5,6 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
     protected
     def after_sign_up_path_for(resource)
-        '/subscribers/new'
+        #'/subscribers/new'
+        '/'
     end
 end
