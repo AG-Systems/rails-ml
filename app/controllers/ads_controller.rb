@@ -17,8 +17,11 @@ class AdsController < ApplicationController
       Dir.mkdir("public/uploads/ad/image/#{@ad[:id]}")
       IO.copy_stream(open(s3_path), "public/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}")
       image_path = "public/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}"
+      print "------------------------------->"
+      print @ad[:image]
       begin
-        classify = `python db/classify_image.py --image_file #{image_path}`
+        #classify = `python db/classify_image.py --image_file #{image_path}`
+        classify = "test"
       rescue
         classify = "Image must be a jpg for image recognition to work. Stay tuned!"
       end
