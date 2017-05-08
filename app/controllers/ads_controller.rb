@@ -29,7 +29,7 @@ class AdsController < ApplicationController
       if classify.length >= 500
           print(classify.length)
           print(classify)
-          temp = classif.index('bytes.')
+          temp = classify.index('bytes.')
           #classify = "Testing"
           #classify.slice(classify.index("bytes.")..-1)
           classify = classify[temp..-1]
