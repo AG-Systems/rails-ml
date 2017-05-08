@@ -24,7 +24,7 @@
          </div>
          <br>
          <p>
-            <%= f.submit "Submit ad", :class => 'btn btn-success' %>
+            <%= f.submit "Submit ad", :class => 'btn btn-success', data: { disable_with: "Please wait..." } %>
          </p>
          <%= f.hidden_field :author, value: current_user.email %>
          <% end %>
