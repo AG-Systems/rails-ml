@@ -26,12 +26,13 @@ class AdsController < ApplicationController
       end
       result = `python db/feedback_alg.py  #{image_path}`
       ad_rating = `python db/rating_alg.py #{image_path}`
-      if classify.length >= 200
+      if classify.length >= 500
           print(classify.length)
           print(classify)
-          #temp = classif.index('bytes.')
+          temp = classif.index('bytes.')
           #classify = "Testing"
           #classify.slice(classify.index("bytes.")..-1)
+          classify = classify[temp..-1]
       end
       @ad.update_attributes(:feedback => result, :rating => ad_rating, :recon => classify)
       redirect_to :action => :index
