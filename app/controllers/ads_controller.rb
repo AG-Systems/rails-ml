@@ -30,7 +30,7 @@ class AdsController < ApplicationController
           print(classify.length)
           print(classify)
           #temp = classif.index('bytes.')
-          classify = "Testing"
+          #classify = "Testing"
           #classify.slice(classify.index("bytes.")..-1)
       end
       @ad.update_attributes(:feedback => result, :rating => ad_rating, :recon => classify)
