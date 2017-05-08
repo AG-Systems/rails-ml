@@ -1,3 +1,4 @@
 tensorflow==1.1.0
+tflearn==0.3
 pillow==4.1.1
 colorthief==0.2.1

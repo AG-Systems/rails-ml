@@ -32,7 +32,7 @@ class AdsController < ApplicationController
           temp = classify.index('bytes.')
           #classify = "Testing"
           #classify.slice(classify.index("bytes.")..-1)
-          classify = classify[temp..-1]
+          classify = classify[temp+6..-1]
       end
       @ad.update_attributes(:feedback => result, :rating => ad_rating, :recon => classify)
       redirect_to :action => :index
