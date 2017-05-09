@@ -18,7 +18,7 @@ img_name = str(sys.argv[2])
 
 TRAIN_DIR = os.path.abspath('train_imgs')
 #TEST_DIR = os.path.abspath('test_imgs')
-TEST_DIR = os.path.abspath("uploads/" + img_id)
+TEST_DIR = os.path.abspath("uploads/" + str(img_id))
 IMG_SIZE = 50
 LR = 1e-3 
 
