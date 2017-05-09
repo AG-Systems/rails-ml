@@ -3,6 +3,7 @@ import numpy as np
 import os
 from random import shuffle
 from tqdm import tqdm
+import sys
 
 import tflearn
 from tflearn.layers.conv import conv_2d, max_pool_2d
@@ -12,9 +13,12 @@ import tensorflow as tf
 
 import matplotlib.pyplot as plt
 #PRE-PROCESSING
+img_id = int(sys.argv[1])
+img_name = str(sys.argv[2])
 
 TRAIN_DIR = os.path.abspath('train_imgs')
-TEST_DIR = os.path.abspath('test_imgs')
+#TEST_DIR = os.path.abspath('test_imgs')
+TEST_DIR = os.path.abspath("uploads/" + img_id)
 IMG_SIZE = 50
 LR = 1e-3 
 
@@ -130,14 +134,19 @@ for num,data in enumerate(test_data[:12]):
     y.axes.get_yaxis().set_visible(False)
 plt.show()
 """
+
+
 with open('submission_file.csv','w') as f:
     f.write('id,label\n')
             
 with open('submission_file.csv','a') as f:
     for data in tqdm(test_data):
         img_num = data[1]
+        if img_num == img_name:
+            print(img_num)
         img_data = data[0]
         orig = img_data
         data = img_data.reshape(IMG_SIZE,IMG_SIZE,1)
         model_out = model.predict([data])[0]
         f.write('{},{}\n'.format(img_num,model_out[1]))
+

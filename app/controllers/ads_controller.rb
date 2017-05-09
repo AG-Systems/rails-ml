@@ -20,21 +20,19 @@ class AdsController < ApplicationController
       image_path = "public/uploads/#{@ad[:id]}/#{@ad[:image]}"
       begin
         classify = `python db/classify_image.py --image_file #{image_path}`
-        #classify = "test"
       rescue
         classify = "Image must be a jpg for image recognition to work. Stay tuned!"
       end
       result = `python db/feedback_alg.py  #{image_path}`
       ad_rating = `python db/rating_alg.py #{image_path}`
-      if classify.length >= 500
+      ml_results = `python db/algorithm/train #{@ad[:id]}  #{image_path}`
+      if classify.length >= 200
           print(classify.length)
           print(classify)
-          temp = classify.index('bytes.')
-          #classify = "Testing"
-          #classify.slice(classify.index("bytes.")..-1)
+          temp = classif.index('bytes.')
           classify = classify[temp+6..-1]
       end
-      @ad.update_attributes(:feedback => result, :rating => ad_rating, :recon => classify)
+      @ad.update_attributes(:feedback => ml_results, :rating => ad_rating, :recon => classify)
       redirect_to :action => :index
       #redirect_to ads_path(@ad)
   end
