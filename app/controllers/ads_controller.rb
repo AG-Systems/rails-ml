@@ -20,7 +20,7 @@ class AdsController < ApplicationController
       image_path = "public/uploads/#{@ad[:id]}/#{@ad[:image]}"
       begin
         #classify = `python db/classify_image.py --image_file #{image_path}`
-        classify = `python db/algorithm/train #{@ad[:id]}  #{image_path}`
+        classify = `python db/algorithm/train.py #{@ad[:id]}  #{image_path}`
       rescue
         classify = "Image must be a jpg for image recognition to work. Stay tuned!"
       end
