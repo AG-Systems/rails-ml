@@ -194,8 +194,11 @@ with open('submission_file.csv') as csvfile:
         #answer = str(round(float(row[1]), 2))
         if str(row[1]) != "label" and str(image_file_name) == row[0]:
             #answer = float("{0:.2f}".format(float(row[1])))
-            answer = float("{0:.2f}".format(float(row[1] * 1.5)* 10))
+            answer = float("{0:.2f}".format((float(row[1]) * 1.5)* 10))
+            answer = 10 - answer
         #print(row[1])
         #print(row[0],row[1])
 score += answer
+if score > 10:
+    score = 10
 print(score)
