@@ -20,4 +20,4 @@
 /public/uploads/ad/image/*
 
 #ignore s3
-/config/initializers/*
+/config/initializers/s3.rb
