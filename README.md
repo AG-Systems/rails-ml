@@ -6,6 +6,8 @@ Python dependencies:
       Tensorflow
 
       Sklearn
+      
+      TFLearn
 
       Pandas
 
@@ -17,12 +19,15 @@ Python dependencies:
 
       updated version of pip
 
-
+      opencv-python
+      
+      h5py
+      
+      tqdm
 Linux dependencies:
 
 
     tesseract-ocr
-
 
 
 For heroku:
@@ -35,8 +40,16 @@ For heroku:
 
     heroku buildpacks:add https://github.com/oswellchan/heroku-buildpack-tesseract
     
+    heroku buildpacks:add https://github.com/computationaltextiles/ct-buildpack-python-opencv.git
+    
+    heroku buildpacks:add https://github.com/orchardmile/heroku-buildpack-numpy-scipy.git
+    
     1) Python
     
-    2) Custom buildpack
+    2) https://github.com/orchardmile/heroku-buildpack-numpy-scipy.git
+    
+    3) https://github.com/computationaltextiles/ct-buildpack-python-opencv.git
+    
+    4) https://github.com/oswellchan/heroku-buildpack-tesseract
 
-    3) Ruby
+    5) Ruby
