@@ -18,3 +18,6 @@
 
 #Ignore the saved images
 /public/uploads/ad/image/*
+
+#ignore s3
+/config/initializers/*

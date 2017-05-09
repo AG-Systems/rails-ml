@@ -4,6 +4,9 @@ import os
 from random import shuffle
 from tqdm import tqdm
 import sys
+import os.path
+
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2' # Disable Tensorflow debugging information
 
 import tflearn
 from tflearn.layers.conv import conv_2d, max_pool_2d
@@ -11,14 +14,18 @@ from tflearn.layers.core import input_data, dropout, fully_connected
 from tflearn.layers.estimator import regression
 import tensorflow as tf
 
+
+import csv
 #import matplotlib.pyplot as plt
+
+
 #PRE-PROCESSING
 img_id = int(sys.argv[1])
 img_name = str(sys.argv[2])
 
-TRAIN_DIR = os.path.abspath('train_imgs')
+TRAIN_DIR = os.path.abspath('db/algorithm/train_imgs')
 #TEST_DIR = os.path.abspath('test_imgs')
-TEST_DIR = os.path.abspath("uploads/" + str(img_id))
+TEST_DIR = os.path.abspath("public/uploads/" + str(img_id))
 IMG_SIZE = 50
 LR = 1e-3 
 
@@ -33,7 +40,7 @@ def label_img(img):
 
 def create_train_data():
     training_data = []
-    for img in tqdm(os.listdir(TRAIN_DIR)):
+    for img in os.listdir(TRAIN_DIR):
         label = label_img(img)
         path = os.path.join(TRAIN_DIR,img)
         img = cv2.resize(cv2.imread(path, cv2.IMREAD_GRAYSCALE), (IMG_SIZE,IMG_SIZE))
@@ -45,7 +52,7 @@ def create_train_data():
 
 def process_test_data():
     testing_data = []
-    for img in tqdm(os.listdir(TEST_DIR)):
+    for img in os.listdir(TEST_DIR):
         path = os.path.join(TEST_DIR,img)
         img_num = img.split('.')[0]
         img = cv2.resize(cv2.imread(path,cv2.IMREAD_GRAYSCALE), (IMG_SIZE,IMG_SIZE))
@@ -88,9 +95,9 @@ model = tflearn.DNN(convnet, tensorboard_dir='log')
 
 
 
-if os.path.exists('C:/Users/H/Desktop/KaggleDogsvsCats/{}.meta'.format(MODEL_NAME)):
+if os.path.exists('{}.meta'.format(MODEL_NAME)):
     model.load(MODEL_NAME)
-    print('model loaded!')
+    #print('model loaded!')
 
 train = train_data[:-30]
 test = train_data[-30:]
@@ -109,44 +116,23 @@ model.save(MODEL_NAME)
 # TESTING
 test_data = process_test_data()
 test_data = np.load('test_data.npy')
-"""
-fig=plt.figure()
 
-for num,data in enumerate(test_data[:12]):
-    # cat: [1,0]
-    # dog: [0,1]
-    
-    img_num = data[1]
-    img_data = data[0]
-    
-    y = fig.add_subplot(3,4,num+1)
-    orig = img_data
-    data = img_data.reshape(IMG_SIZE,IMG_SIZE,1)
-    #model_out = model.predict([data])[0]
-    model_out = model.predict([data])[0]
-    
-    if np.argmax(model_out) == 1: str_label='Neg'
-    else: str_label='Pos'
-        
-    y.imshow(orig,cmap='gray')
-    plt.title(str_label)
-    y.axes.get_xaxis().set_visible(False)
-    y.axes.get_yaxis().set_visible(False)
-plt.show()
-"""
 
 
 with open('submission_file.csv','w') as f:
     f.write('id,label\n')
-            
 with open('submission_file.csv','a') as f:
-    for data in tqdm(test_data):
+    for data in test_data:
         img_num = data[1]
-        if img_num == img_name:
-            print(img_num)
         img_data = data[0]
         orig = img_data
         data = img_data.reshape(IMG_SIZE,IMG_SIZE,1)
         model_out = model.predict([data])[0]
         f.write('{},{}\n'.format(img_num,model_out[1]))
 
+with open('submission_file.csv') as csvfile:
+    readCSV = csv.reader(csvfile, delimiter=',')
+    for row in readCSV:
+        print(row)
+        print(row[0])
+        print(row[0],row[1])
