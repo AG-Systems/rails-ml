@@ -186,13 +186,15 @@ with open('submission_file.csv','a') as f:
         f.write('{},{}\n'.format(img_num,model_out[1]))
 print("RATING_SCORE")
 answer = 0
+image_file_name = os.path.basename(os.path.splitext(img_name)[0])
 with open('submission_file.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     for row in readCSV:
         #print(row)
         #answer = str(round(float(row[1]), 2))
-        if str(row[1]) != "label":
-            answer = round(float(row[1]), 2)
+        if str(row[1]) != "label" and str(image_file_name) == row[0]:
+            #answer = float("{0:.2f}".format(float(row[1])))
+            answer = float("{0:.2f}".format(float(row[1] * 1.5)* 10))
         #print(row[1])
         #print(row[0],row[1])
 score += answer

@@ -26,7 +26,7 @@ class AdsController < ApplicationController
       end
       result = `python db/feedback_alg.py  #{image_path}`
       ad_rating = `python db/rating_alg.py #{image_path} #{@ad[:id]}`
-      if classify.length >= 200
+      if classify.length >= 500
           print(classify.length)
           print(classify)
           temp = classify.index('bytes.')
