@@ -11,7 +11,7 @@ from tflearn.layers.core import input_data, dropout, fully_connected
 from tflearn.layers.estimator import regression
 import tensorflow as tf
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 #PRE-PROCESSING
 img_id = int(sys.argv[1])
 img_name = str(sys.argv[2])
