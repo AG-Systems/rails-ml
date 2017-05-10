@@ -19,15 +19,15 @@ class Post extends React.Component {
             <div className="card-images">
                 <img src={this.props.image} alt={this.props.title} id="ad-image"/>
                 <div className="container-images">
-                    <h3><b>{this.props.title}</b></h3>
+                    <h2><b>{this.props.title}</b></h2>
+                    <p><b>Feedback: </b></p>
                     {this.state.feedback.split("\n").map(i => {
                           return <p>{i}</p>;
                     })}
                     <hr/>
                     <p><b>Image Recognition:</b></p>
-                    {this.props.analysis.split("\n").map(i => {
-                          return <p>{i}</p>;
-                    })}
+                    <p>You must be a premium user to get this feature</p>
+                    <a href="/subscribers"><button type="button" className="btn btn-primary">Subscribe</button></a>
                     <hr/>
                     <p>Rating: {this.props.rating}/10</p>
                 </div>
@@ -37,7 +37,45 @@ class Post extends React.Component {
   }
 }
 
+class Paid extends React.Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      feedback: 'Loading...'
+    };
+  }
+  componentDidMount() 
+  {
+      this.setState({feedback: this.props.feed}, function() 
+      {
+          console.log(this.state.feedback);
+      });   
+  }
+  render() {
+    return(
+        <div>
+            <div className="card-images">
+                <img src={this.props.image} alt={this.props.title} id="ad-image"/>
+                <div className="container-images">
+                    <h3><b>{this.props.title}</b></h3>
+                    {this.state.feedback.split("\n").map(i => {
+                          return <p>{i}</p>;
+                    })}
+                    <hr/>
+                    <p><b>Image Recognition:</b></p>
+                    {this.props.analysis.split("\n").map(i => {
+                          return <p>{i}</p>;
+                    })}
+
+                    <hr/>
+                    <p>Rating: {this.props.rating}/10</p>
+                </div>
+            </div>
+        </div>
+        )   
+  }
+}
 
 /*
 

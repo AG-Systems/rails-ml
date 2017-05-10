@@ -1,17 +1,25 @@
 <% if user_signed_in? %>
   <% if current_user.subscribed? %>
-  <br>
-		<div id="root"></div>
+	  <!-- PAID USER -->
+		<%= render :template => "pages/new" %>
+		<br/>
+		<h4 style="text-align: center;">Current stage: <b>Alpha</b></h4>
+		<br/>
+			<% @images.where(author:  current_user.email).each do |ad| %>
+					<%= react_component("Paid", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating, analysis: ad.recon}, {prerender: true}) %>
+					<br/>
+			<% end %>
 <% else %>
 <!-- NOT PAID -->
 <br>
-	<%= render :template => "pages/new" %>
-	<br/>
-	<h4 style="text-align: center;">Current stage: <b>Alpha</b></h4>
-	<br/>
-		<% @images.where(author:  current_user.email).each do |ad| %>
-		<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating, analysis: ad.recon}, {prerender: true}) %>
-	<% end %>
+		<%= render :template => "pages/new" %>
+		<br/>
+		<h4 style="text-align: center;">Current stage: <b>Alpha</b></h4>
+		<br/>
+			<% @images.where(author:  current_user.email).each do |ad| %>
+			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
+			<br/>
+		<% end %>
 
 
 <% end %>
