@@ -21,7 +21,7 @@ class AdsController < ApplicationController
       image_path = "public/uploads/#{@ad[:id]}/#{@ad[:image]}"
       begin
         #classify = `python db/classify_image.py --image_file #{image_path}`
-        classify=""
+        classify="" #classify_image takes up too much power at the moment
       rescue
         classify = "Image must be a jpg for image recognition to work. Stay tuned!"
       end
@@ -31,10 +31,12 @@ class AdsController < ApplicationController
           print(classify.length)
           print(classify)
           temp = classify.index('bytes.')
+          temp = Integer(temp) + 6
           classify = classify[temp..-1]
       end
       puts ad_rating
       index_rating = ad_rating.index('RATING_SCORE')
+      index_rating = Integer(index_rating) + 12 
       ad_rating = ad_rating[index_rating..-1]
       @ad.update_attributes(:feedback => result, :rating => ad_rating, :recon => classify)
       redirect_to :action => :index

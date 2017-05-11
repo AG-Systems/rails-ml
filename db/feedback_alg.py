@@ -4,6 +4,7 @@ from colorthief import ColorThief
 import tensorflow as tf
 # from tesseract import image_to_string
 import pytesser
+import string
 
 results = ""
 imgurl = str(sys.argv[1])
@@ -69,10 +70,16 @@ with Image.open(imgurl) as img:
         
 txt = pytesser.image_to_string(imgurl)
 txt = txt.replace('\n', ' ').replace('\r', '')
+alpha_list = list(string.ascii_lowercase)
+length = 0
+for x in txt:
+    if x in alpha_list:
+        length += 1
 print("\n")
-print("The amount of text on your ad is: " + str(len(txt)) + " characters")
+print("The amount of text on your ad is: " + str(length) + " characters")
 print("\n")
 print("Detected text: " + str(txt))
 
 if len(txt) > 0:
-    print("Remember: Facebook prefers little or no text on ad")
+    pass
+    #print("Remember: Facebook prefers little or no text on ad")

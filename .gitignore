@@ -20,4 +20,14 @@
 /public/uploads/ad/image/*
 
 #ignore s3
-/config/initializers/s3.rb
+config/initializers/s3.rb
+
+/public/uploads/*
+
+submission_file.csv
+
+test_data.npy
+
+train_data.npy
+
+posvsneg*
