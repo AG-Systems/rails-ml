@@ -20,7 +20,29 @@
 			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
 			<br/>
 		<% end %>
-
+		<% if @images.where(author: current_user.email).length == 0 %>
+			<div class="alert alert-warning card-images">
+			  <strong>Warning!</strong> We are not responsible for any real life results. This is a tool only and not an replacement.
+			</div>
+        <div>
+            <div class="card-images">
+                <img src="../insert_ad.jpg" alt="" id="ad-image"/>
+                <div class="container-images">
+                    <h3><b>Your ad title goes here</b></h3>
+										<p><b>Feedback: </b></p>
+										<p style="font-size: 16px">Your feedback and info goes here</p>
+                    <hr/>
+                    <p><b>Image Recognition:</b></p>
+						<p style="font-size: 16px">See how recognizable your image is</p>
+						<p style="font-size: 16px">Shows the top 5 guesses</p>
+                    <hr/>
+                    <p>Rating: 10/10</p>
+                    <p style="font-size: 16px">Anything above 5 is good</p>
+                    <p style="font-size: 16px">Anything below 5 is bad</p>                    
+                </div>
+            </div>
+        </div>
+		<% end %>
 
 <% end %>
 <% else %>

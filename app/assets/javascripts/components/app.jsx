@@ -19,7 +19,7 @@ class Post extends React.Component {
             <div className="card-images">
                 <img src={this.props.image} alt={this.props.title} id="ad-image"/>
                 <div className="container-images">
-                    <h2><b>{this.props.title}</b></h2>
+                    <h2><b>Title: {this.props.title}</b></h2>
                     <p><b>Feedback: </b></p>
                     {this.state.feedback.split("\n").map(i => {
                           return <p>{i}</p>;
@@ -59,6 +59,7 @@ class Paid extends React.Component {
                 <img src={this.props.image} alt={this.props.title} id="ad-image"/>
                 <div className="container-images">
                     <h3><b>{this.props.title}</b></h3>
+                    <p><b>Feedback: </b></p>
                     {this.state.feedback.split("\n").map(i => {
                           return <p>{i}</p>;
                     })}
