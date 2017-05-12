@@ -10,7 +10,7 @@ class SubscribersController < ApplicationController
         
         customer = Stripe::Customer.create(
             card: token,
-            plan: 0000,
+            plan: 1800,
             #email: current_user.email
         
             )
@@ -18,7 +18,7 @@ class SubscribersController < ApplicationController
             current_user.stripeid = customer.id
             current_user.save
             
-             redirect_to root_path, notice: "Your subscription was set up successfully!"
+            redirect_to root_path, notice: "Your subscription was set up successfully!"
     end
     def update
     
@@ -26,7 +26,7 @@ class SubscribersController < ApplicationController
         
         customer = Stripe::Customer.create(
             card: token,
-            plan: 0000,
+            plan: 1800,
             #email: current_sign_in.email
         
             )
