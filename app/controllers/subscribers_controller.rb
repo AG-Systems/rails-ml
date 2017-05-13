@@ -21,7 +21,8 @@ class SubscribersController < ApplicationController
             redirect_to root_path, notice: "Your subscription was set up successfully!"
     end
     def update
-    
+        
+        
         token = params[:stripeToken]
         
         customer = Stripe::Customer.create(

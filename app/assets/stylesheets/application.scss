@@ -510,6 +510,10 @@ body {
 	-webkit-font-smoothing: antialiased !important;
 }
 */
+body
+{
+	background-color: #f0fbf7;
+}
 .justify-text {
 	text-align: justify;
 }
@@ -1219,8 +1223,9 @@ ul li
     margin: 0 auto;
     width: 35%;
     min-width: 300px;
-    /*padding-top: 20px; */
+    /*padding-top: 20px; 
     padding-bottom: 20px;
+    */
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -1231,6 +1236,7 @@ ul li
 /* Add some padding inside the card container */
 .container-images {
     padding: 2px 16px;
+    background-color: #f9f9f9;
 }
 
 .card-images img
@@ -1260,4 +1266,9 @@ ul li
 h2
 {
 	color: black;
+}
+
+.input-max
+{
+	width: 100%;
 }

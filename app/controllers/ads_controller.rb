@@ -12,7 +12,7 @@ class AdsController < ApplicationController
   end
   def create
       @ad = Ad.new(post_params)
-      @ad.save
+      @ad.save #vertiy photo is jpeg,gif, or png
       @ad.update_attributes(:feedback => "", :rating => "", :recon => "") #if image upload fails
       s3_path = "https://techauriga.s3.amazonaws.com/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}"
       directory_name = "public/uploads/#{@ad[:id]}"
