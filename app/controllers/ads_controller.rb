@@ -1,4 +1,5 @@
 class AdsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   include PagesHelper
   require 'open-uri'
   layout 'application'
@@ -21,7 +22,11 @@ class AdsController < ApplicationController
       image_path = "public/uploads/#{@ad[:id]}/#{@ad[:image]}"
       begin
         #classify = `python db/classify_image.py --image_file #{image_path}`
-        classify="" #classify_image takes up too much power at the moment
+        if current_user.subscribed
+            classify = `python db/classify_image.py --image_file #{image_path}`
+        else
+            classify="" #classify_image takes up too much power at the moment          
+        end
       rescue
         classify = "Image must be a jpg for image recognition to work. Stay tuned!"
       end

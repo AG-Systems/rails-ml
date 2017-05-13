@@ -18,13 +18,19 @@
                  <div style="text-align: center;">
                      <label class="btn btn-info btn-file" style="text-align: center; width: 75%;">
                         Browse files
-                      <%= f.file_field :image, accept:'image/*', :style => "display: none" %>
+                      <%= f.file_field :image, accept:'image/*', :style => "display: none", :id =>"my-file-selector", :required => true %>
                       <% if f.object.image? %>
                         <%= image_tag f.object.image.thumb.url %>
                         <%= f.label :remove_image %>
                         <%= f.check_box :remove_image %> 
                       <% end %>    
                       </label>
+                      <div>
+                          File name:
+                    <div style="text-align: center;">
+                     <input type="text" id="upload-file-info" style="border: none;background-color: transparent; text-align:center;" readonly/> 
+                    </div>
+                      </div>
                   </div>
                     <h3><%= f.text_field :title, class: "input-max", :required => true, placeholder:"Title of your ad" %></h3>
 										<p><b>Feedback: </b></p>
@@ -47,3 +53,12 @@
          <%= f.hidden_field :author, value: current_user.email %>
          <% end %>
         </div>
+<script>
+    $('#my-file-selector').on('change',function(){
+          $('#upload-file-info').val(this.files && this.files.length ?
+          this.files[0].name : this.value.replace(/^C:\\fakepath\\/i, ''))
+          
+          
+        })
+    
+</script>
