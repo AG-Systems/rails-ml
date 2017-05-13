@@ -11,10 +11,21 @@
                <li class="alert alert-danger card-images"><%= error %></li>
             <% end %>
          </ul>               
-                <div style="width: 100%; height: 150px; background-color: #939393;">
-                   <div style="text-align: center; color: white; line-height: 150px; font-size: 25px;">Drag and drop image(alpha)</div>
-                </div>
+                        <div style="width: 100%; height: 150px; background-color: #939393;" class="dropzone">
+                           <div style="text-align: center; color: white; line-height: 150px; font-size: 25px;">Drag and drop image(alpha)</div>
+                        </div>
                 <div class="container-images">
+                 <div style="text-align: center;">
+                     <label class="btn btn-info btn-file" style="text-align: center; width: 75%;">
+                        Browse files
+                      <%= f.file_field :image, accept:'image/*', :style => "display: none" %>
+                      <% if f.object.image? %>
+                        <%= image_tag f.object.image.thumb.url %>
+                        <%= f.label :remove_image %>
+                        <%= f.check_box :remove_image %> 
+                      <% end %>    
+                      </label>
+                  </div>
                     <h3><%= f.text_field :title, class: "input-max", :required => true, placeholder:"Title of your ad" %></h3>
 										<p><b>Feedback: </b></p>
 										<p style="font-size: 16px">Your feedback and info goes here</p>
@@ -26,21 +37,13 @@
                     <p>Rating: 10/10</p>
                     <p style="font-size: 16px">Anything above 5 is good</p>
                     <p style="font-size: 16px">Anything below 5 is bad</p>   
-                  <div>
-                  <%= f.file_field :image, accept:'image/*' %>
-                  <% if f.object.image? %>
-                    <%= image_tag f.object.image.thumb.url %>
-                    <%= f.label :remove_image %>
-                    <%= f.check_box :remove_image %> 
-                  <% end %>    
+                  <br/>
+                  <div style="text-align: center;">
+                      <%= f.submit "Submit ad", :class => 'btn btn-success', :style => "width: 75%", data: { disable_with: "Please wait..." } %>
                   </div>
                   <br/>
-                  <div>
-                  <%= f.submit "Submit ad", :class => 'btn btn-success', data: { disable_with: "Please wait..." } %>
-                  </div>
                 </div>
             </div>
          <%= f.hidden_field :author, value: current_user.email %>
          <% end %>
         </div>
-       
