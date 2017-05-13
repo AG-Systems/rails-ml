@@ -1,31 +1,39 @@
  <br>
-		<div id="main"> 
-       <%= form_for(@ad) do |f| %>
+			<div class="alert alert-warning card-images">
+			  <strong>Warning!</strong> We are not responsible for any real life results. This is a tool only and not an replacement.
+			</div>
+			
+        <div>
+      <%= form_for(@ad) do |f| %>
+            <div class="card-images">
          <ul>
             <% @ad.errors.full_messages.each do |error| %>
             <li><%= error %></li>
             <% end %>
-         </ul>
-         <div id="main">
-            <div class="card">
-               <div class="card-block">
-                  <p>Title</p>
-                  <h4 class="card-title">
-                     <%= f.text_field :title, :required => true %>
-                  </h4>
-               </div>
+         </ul>               
+                <img src="../insert_ad.jpg" alt="" id="ad-image"/>
+                <div class="container-images">
+                    <h3><%= f.text_field :title, :required => true %></h3>
+										<p><b>Feedback: </b></p>
+										<p style="font-size: 16px">Your feedback and info goes here</p>
+                    <hr/>
+                    <p><b>Image Recognition:</b></p>
+						<p style="font-size: 16px">See how recognizable your image is</p>
+						<p style="font-size: 16px">Shows the top 5 guesses</p>
+                    <hr/>
+                    <p>Rating: 10/10</p>
+                    <p style="font-size: 16px">Anything above 5 is good</p>
+                    <p style="font-size: 16px">Anything below 5 is bad</p>   
                   <%= f.file_field :image, accept:'image/*' %>
                   <% if f.object.image? %>
                     <%= image_tag f.object.image.thumb.url %>
                     <%= f.label :remove_image %>
                     <%= f.check_box :remove_image %> 
-                  <% end %>         
+                  <% end %>    
+                  
+                  <%= f.submit "Submit ad", :class => 'btn btn-success', data: { disable_with: "Please wait..." } %>
+                </div>
             </div>
-         </div>
-         <br>
-         <p>
-            <%= f.submit "Submit ad", :class => 'btn btn-success', data: { disable_with: "Please wait..." } %>
-         </p>
          <%= f.hidden_field :author, value: current_user.email %>
          <% end %>
-      </div>
+        </div>
