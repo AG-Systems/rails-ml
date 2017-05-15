@@ -101,5 +101,5 @@ print("\n")
 print("Detected text: " + str(txt))
 
 if len(txt) > 5:
-    results += "Remember: Facebook prefers little or no text on ad")
+    results += "Remember: Facebook prefers little or no text on ad"
 print(results)

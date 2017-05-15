@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'subscribers' => 'subscribers#new'
   get 'upload' => 'pages#new'
   get 'terms' => 'pages#terms'
+  get 'error' => 'ads#error'
   resources :accounts
   resources :subscribers
   resources :ads

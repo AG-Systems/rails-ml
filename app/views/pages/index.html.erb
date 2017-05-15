@@ -1,17 +1,39 @@
 <% if user_signed_in? %>
   <% if current_user.subscribed? %>
 	  <!-- PAID USER -->
+	  <br/>
+	  <br/>
+	  <div class="alert alert-success card-images" role="alert">
+		  <strong>Well done!</strong> You <b>unlimited</b> uploads this month! 
+		</div>
 		<%= render :template => "pages/new" %>
 		<br/>
 		<h4 style="text-align: center;">Current stage: <b>Alpha</b></h4>
 		<br/>
 			<% @images.where(author:  current_user.email).each do |ad| %>
-					<%= react_component("Paid", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating, analysis: ad.recon}, {prerender: true}) %>
+					<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
 					<br/>
 			<% end %>
 <% else %>
 <!-- NOT PAID -->
-<br>
+<br/>
+<br/>
+	  <% if current_user.limit > 0 %>		
+			<div class="alert alert-warning card-images">
+			  <strong>Warning!</strong> You have <b><%= current_user.limit %> uploads </b> left for this month
+			  <br/>
+			  <a href="/subscribers"><button class="btn btn-warning">Subscribe</button></a>
+			</div>
+		<% else %>
+			<div class="alert alert-danger card-images">
+			  <strong>Warning!</strong> You have 0 uploads left for this month
+			  <br/>
+			  <a href="/subscribers"><button class="btn btn-danger">Subscribe</button></a>
+			</div>
+			<script>
+				alert("You have 0 uploads left for this month");
+			</script>
+		<% end %>
 		<%= render :template => "pages/new" %>
 		<br/>
 		<h4 style="text-align: center;">Current stage: <b>Alpha</b></h4>
@@ -19,29 +41,6 @@
 			<% @images.where(author:  current_user.email).each do |ad| %>
 			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
 			<br/>
-		<% end %>
-		<% if @images.where(author: current_user.email).length == 0 %>
-			<div class="alert alert-warning card-images">
-			  <strong>Warning!</strong> We are not responsible for any real life results. This is a tool only and not an replacement.
-			</div>
-        <div>
-            <div class="card-images">
-                <img src="../insert_ad.jpg" alt="" id="ad-image"/>
-                <div class="container-images">
-                    <h3><b>Your ad title goes here</b></h3>
-										<p><b>Feedback: </b></p>
-										<p style="font-size: 16px">Your feedback and info goes here</p>
-                    <hr/>
-                    <p><b>Image Recognition:</b></p>
-						<p style="font-size: 16px">See how recognizable your image is</p>
-						<p style="font-size: 16px">Shows the top 5 guesses</p>
-                    <hr/>
-                    <p>Rating: 10/10</p>
-                    <p style="font-size: 16px">Anything above 5 is good</p>
-                    <p style="font-size: 16px">Anything below 5 is bad</p>                    
-                </div>
-            </div>
-        </div>
 		<% end %>
 
 <% end %>
@@ -86,7 +85,7 @@
 			<br/>
 			 <div class="card-images" style="background-color: rgba(0, 187, 255,0.2)">
               <img src="http://placehold.it/350x150" alt="" id="ad-image"/>
-                <div class="container-images">
+                <div class="container-images" style="background-color: transparent;">
                     <h3><b>Insert your ad here</b></h3>
 										<p>By using machine learning, our algorithm will give you instant feedback on your ads</p>
                     <hr/>

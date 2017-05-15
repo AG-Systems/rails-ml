@@ -25,10 +25,6 @@ class Post extends React.Component {
                           return <p>{i}</p>;
                     })}
                     <hr/>
-                    <p><b>Image Recognition:</b></p>
-                    <p>You must be a premium user to get this feature</p>
-                    <a href="/subscribers"><button type="button" className="btn btn-primary">Subscribe</button></a>
-                    <hr/>
                     <p>Rating: {this.props.rating}/10</p>
                 </div>
             </div>
@@ -36,6 +32,7 @@ class Post extends React.Component {
         )   
   }
 }
+/*
 
 class Paid extends React.Component {
   constructor(props) {
@@ -78,7 +75,7 @@ class Paid extends React.Component {
   }
 }
 
-/*
+
 
       var that = this;
       fetch("//api.giphy.com/v1/gifs/search?q=$" + that.props.title + "&api_key=dc6zaTOxFJmzC")

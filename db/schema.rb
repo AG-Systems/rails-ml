@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502020007) do
+ActiveRecord::Schema.define(version: 20170515023001) do
 
   create_table "ads", force: :cascade do |t|
     t.string   "title"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20170502020007) do
     t.boolean  "subscribed"
     t.string   "stripeid"
     t.boolean  "admin",                  default: false
+    t.integer  "limit"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
