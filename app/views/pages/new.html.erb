@@ -1,14 +1,15 @@
 
 			
         <div>
-      <%= form_for(@ad) do |f| %>
-            <div class="card-images">
+      <%= form_for(@ad, :html => {:id => "testupload"}) do |f| %>
+
+            <div class="card-images previews">
          <ul>
             <% @ad.errors.full_messages.each do |error| %>
                <li class="alert alert-danger card-images"><%= error %></li>
             <% end %>
          </ul>               
-                        <div style="width: 100%; height: 150px; background-color: #939393;" class="dropzone">
+                        <div style="width: 100%; height: 150px; background-color: #939393;" class="details">
                            <div style="text-align: center; color: white; line-height: 150px; font-size: 25px;">Drag and drop image(alpha)</div>
                         </div>
                 <div class="container-images">
@@ -59,5 +60,4 @@
           
           
         })
-    
 </script>

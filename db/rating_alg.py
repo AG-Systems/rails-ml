@@ -81,7 +81,7 @@ img_name = str(sys.argv[1])
 TRAIN_DIR = os.path.abspath('db/algorithm/train_imgs')
 #TEST_DIR = os.path.abspath('test_imgs')
 TEST_DIR = os.path.abspath("public/uploads/" + str(img_id))
-IMG_SIZE = 50
+IMG_SIZE = 150
 LR = 1e-3 
 
 MODEL_NAME = 'posvsneg-{}-{}.model'.format(LR, '6conv-basic')
@@ -171,8 +171,26 @@ model.save(MODEL_NAME)
 # TESTING
 test_data = process_test_data()
 test_data = np.load('test_data.npy')
-
-
+image_file_name = os.path.basename(os.path.splitext(img_name)[0])
+str_label = ""
+print("RATING_CLASS")
+for num,data in enumerate(test_data):
+    # pos: [1,0]
+    # neg: [0,1]
+    
+    img_num = data[1]
+    img_data = data[0]
+    orig = img_data
+    data = img_data.reshape(IMG_SIZE,IMG_SIZE,1)
+    #model_out = model.predict([data])[0]
+    model_out = model.predict([data])[0]
+    
+    if str(image_file_name) == str(img_num):
+        if np.argmax(model_out) == 1: 
+            str_label='Run'
+        else: 
+            str_label='Do not run'
+        print(str_label)
 
 with open('submission_file.csv','w') as f:
     f.write('id,label\n')
@@ -184,9 +202,9 @@ with open('submission_file.csv','a') as f:
         data = img_data.reshape(IMG_SIZE,IMG_SIZE,1)
         model_out = model.predict([data])[0]
         f.write('{},{}\n'.format(img_num,model_out[1]))
-print("RATING_SCORE")
+# print("RATING_SCORE")
 answer = 0
-image_file_name = os.path.basename(os.path.splitext(img_name)[0])
+print("RATING_SCORE")
 with open('submission_file.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     for row in readCSV:
@@ -195,10 +213,25 @@ with open('submission_file.csv') as csvfile:
         if str(row[1]) != "label" and str(image_file_name) == row[0]:
             #answer = float("{0:.2f}".format(float(row[1])))
             answer = float("{0:.2f}".format((float(row[1]) * 1.5)* 10))
-            answer = 10 - answer
+            if str_label == "Do not run":
+                answer = 10 - answer
+                if answer > 3.0:
+                    answer = 10 - answer
+                else:
+                    answer = 10 - (answer * .8)  
+                pass
+            else:
+                answer = 10 - answer
+                if answer > 3.0:
+                    answer = 10 - (answer * .8)
+                else:
+                    answer = 10 - answer                
+                pass
         #print(row[1])
         #print(row[0],row[1])
 score += answer
 if score > 10:
     score = 10
+if score < 0:
+    score = 0
 print(score)

@@ -48,10 +48,13 @@ class AdsController < ApplicationController
         end
         puts ad_rating
         index_rating = ad_rating.index('RATING_SCORE')
+        index_class = ad_rating.index('RATING_CLASS')
         index_rating = Integer(index_rating) + 12 
+        run_status = ad_rating[(index_class.to_i + 12)..(index_rating.to_i-13)]
         ad_rating = ad_rating[index_rating..-1]
-        number_uploads = @user[:limit]
+        result += "\n result: #{run_status}"
         
+        number_uploads = @user[:limit]
         if !current_user.subscribed
           number_uploads = @user[:limit]
           number_uploads -= 1

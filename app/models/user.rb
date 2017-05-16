@@ -1,13 +1,12 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  before_create :limit
-  def limit
-     self.admin ||= 5
-  end
-  def admin?
-    has_role?(:admin)
-  end
+  before_create :set_default_limit
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  private
+  def set_default_limit
+    self.limit ||= 5
+  end
 end

@@ -24,10 +24,12 @@ class Post extends React.Component {
                     {this.state.feedback.split("\n").map(i => {
                           return <p>{i}</p>;
                     })}
+              
                     <hr/>
                     <p>Rating: {this.props.rating}/10</p>
                 </div>
             </div>
+            <br/>
         </div>
         )   
   }
