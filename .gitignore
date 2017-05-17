@@ -32,4 +32,6 @@ train_data.npy
 
 posvsneg*
 
-/db/algorithm/*
+ # /db/algorithm/*
+
+checkpoint

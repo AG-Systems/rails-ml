@@ -53,3 +53,7 @@ For heroku:
     4) https://github.com/oswellchan/heroku-buildpack-tesseract
 
     5) Ruby
+
+
+
+rails s -p $PORT -b $IP

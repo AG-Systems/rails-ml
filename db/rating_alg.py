@@ -81,7 +81,7 @@ img_name = str(sys.argv[1])
 TRAIN_DIR = os.path.abspath('db/algorithm/train_imgs')
 #TEST_DIR = os.path.abspath('test_imgs')
 TEST_DIR = os.path.abspath("public/uploads/" + str(img_id))
-IMG_SIZE = 200
+IMG_SIZE = 100
 LR = 1e-3 
 
 MODEL_NAME = 'posvsneg-{}-{}.model'.format(LR, '6conv-basic')
@@ -155,8 +155,8 @@ if os.path.exists('{}.meta'.format(MODEL_NAME)):
     #print('model loaded!')
     pass
 
-train = train_data[:-30]
-test = train_data[-30:]
+train = train_data[:-110]
+test = train_data[-110:]
 
 X = np.array([i[0] for i in train]).reshape(-1,IMG_SIZE,IMG_SIZE,1)
 Y = [i[1] for i in train]
@@ -188,9 +188,9 @@ for num,data in enumerate(test_data):
     
     if str(image_file_name) == str(img_num):
         if np.argmax(model_out) == 1: 
-            str_label='Run'
+            str_label='Do not run' #pos
         else: 
-            str_label='Do not run'
+            str_label='Run' #neg
         print(str_label)
 
 with open('submission_file.csv','w') as f:
