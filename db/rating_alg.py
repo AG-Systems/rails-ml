@@ -81,7 +81,7 @@ img_name = str(sys.argv[1])
 TRAIN_DIR = os.path.abspath('db/algorithm/train_imgs')
 #TEST_DIR = os.path.abspath('test_imgs')
 TEST_DIR = os.path.abspath("public/uploads/" + str(img_id))
-IMG_SIZE = 150
+IMG_SIZE = 200
 LR = 1e-3 
 
 MODEL_NAME = 'posvsneg-{}-{}.model'.format(LR, '6conv-basic')
@@ -153,6 +153,7 @@ model = tflearn.DNN(convnet, tensorboard_dir='log')
 if os.path.exists('{}.meta'.format(MODEL_NAME)):
     model.load(MODEL_NAME)
     #print('model loaded!')
+    pass
 
 train = train_data[:-30]
 test = train_data[-30:]
@@ -193,7 +194,7 @@ for num,data in enumerate(test_data):
         print(str_label)
 
 with open('submission_file.csv','w') as f:
-    f.write('id,label\n')
+    f.write('id,label,test\n')
 with open('submission_file.csv','a') as f:
     for data in test_data:
         img_num = data[1]
@@ -202,8 +203,8 @@ with open('submission_file.csv','a') as f:
         data = img_data.reshape(IMG_SIZE,IMG_SIZE,1)
         model_out = model.predict([data])[0]
         f.write('{},{}\n'.format(img_num,model_out[1]))
-# print("RATING_SCORE")
 answer = 0
+score = 5
 print("RATING_SCORE")
 with open('submission_file.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
@@ -212,26 +213,23 @@ with open('submission_file.csv') as csvfile:
         #answer = str(round(float(row[1]), 2))
         if str(row[1]) != "label" and str(image_file_name) == row[0]:
             #answer = float("{0:.2f}".format(float(row[1])))
-            answer = float("{0:.2f}".format((float(row[1]) * 1.5)* 10))
+            #answer = float("{0:.2f}".format((float(row[1]) * 1.5)* 10))
+            answer = float(row[1])
+            answer *= 10
             if str_label == "Do not run":
-                answer = 10 - answer
-                if answer > 3.0:
-                    answer = 10 - answer
-                else:
-                    answer = 10 - (answer * .8)  
+                # answer = 10 - answer
+                answer = -answer * .75
                 pass
             else:
-                answer = 10 - answer
-                if answer > 3.0:
-                    answer = 10 - (answer * .8)
-                else:
-                    answer = 10 - answer                
+                answer = answer * .75
                 pass
         #print(row[1])
         #print(row[0],row[1])
+answer = float("{0:.2f}".format(answer))
 score += answer
 if score > 10:
     score = 10
 if score < 0:
     score = 0
 print(score)
+os.remove("test_data.npy")

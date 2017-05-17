@@ -20,13 +20,11 @@ import csv
 
 
 #PRE-PROCESSING
-img_id = int(sys.argv[1])
-img_name = str(sys.argv[2])
 
-TRAIN_DIR = os.path.abspath('db/algorithm/train_imgs')
-#TEST_DIR = os.path.abspath('test_imgs')
-TEST_DIR = os.path.abspath("public/uploads/" + str(img_id))
-IMG_SIZE = 50
+TRAIN_DIR = os.path.abspath('train_imgs')
+TEST_DIR = os.path.abspath('test_imgs')
+#TEST_DIR = os.path.abspath("public/uploads/" + str(img_id))
+IMG_SIZE = 470
 LR = 1e-3 
 
 MODEL_NAME = 'posvsneg-{}-{}.model'.format(LR, '6conv-basic')
@@ -116,8 +114,47 @@ model.save(MODEL_NAME)
 # TESTING
 test_data = process_test_data()
 test_data = np.load('test_data.npy')
+"""
+for num,data in enumerate(test_data[:12]):
+    # cat: [1,0]
+    # dog: [0,1]
+    
+    img_num = data[1]
+    img_data = data[0]
+    
+    y = fig.add_subplot(3,4,num+1)
+    orig = img_data
+    data = img_data.reshape(IMG_SIZE,IMG_SIZE,1)
+    #model_out = model.predict([data])[0]
+    model_out = model.predict([data])[0]
+    
+    if np.argmax(model_out) == 1: str_label='Dog'
+    else: str_label='Cat'
+        
+    y.imshow(orig,cmap='gray')
+    plt.title(str_label)
+    y.axes.get_xaxis().set_visible(False)
+    y.axes.get_yaxis().set_visible(False)
+plt.show()
+"""
 
-
+for num,data in enumerate(test_data):
+    # pos: [1,0]
+    # neg: [0,1]
+    
+    img_num = data[1]
+    img_data = data[0]
+    orig = img_data
+    data = img_data.reshape(IMG_SIZE,IMG_SIZE,1)
+    #model_out = model.predict([data])[0]
+    model_out = model.predict([data])[0]
+    if np.argmax(model_out) == 1: 
+        str_label='Run'
+    else: 
+        str_label='Do not run'
+    print(img_num)
+    print(str_label)
+    print("------")
 
 with open('submission_file.csv','w') as f:
     f.write('id,label\n')

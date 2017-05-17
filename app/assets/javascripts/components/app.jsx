@@ -26,7 +26,7 @@ class Post extends React.Component {
                     })}
               
                     <hr/>
-                    <p>Rating: {this.props.rating}/10</p>
+                    <p><b>Rating: {this.props.rating}/10</b></p>
                 </div>
             </div>
             <br/>

@@ -98,7 +98,7 @@ for x in txt:
 print("\n")
 print("The amount of text on your ad is: " + str(length) + " characters")
 print("\n")
-print("Detected text: " + str(txt))
+# print("Detected text: " + str(txt))
 
 if len(txt) > 5:
     results += "Remember: Facebook prefers little or no text on ad"
