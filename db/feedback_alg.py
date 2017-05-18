@@ -8,6 +8,7 @@ import string
 
 results = ""
 imgurl = str(sys.argv[1])
+"""
 color_thief = ColorThief(imgurl)
 rgb = color_thief.get_color(quality=1)
 if rgb[0] > 150 and rgb[1] < 250 and rgb[2] < 50:
@@ -86,7 +87,7 @@ with Image.open(imgurl) as img:
         results += "The supply of available display ads for this ad size is generally limited though, which may lead to sub-optimal ad performance."
         results += "\n"
         results += "Used for: Desktop"
-        
+"""       
 txt = pytesser.image_to_string(imgurl)
 txt = txt.replace('\n', ' ').replace('\r', '')
 alpha_list = list(string.ascii_lowercase)
@@ -99,7 +100,8 @@ print("\n")
 print("The amount of text on your ad is: " + str(length) + " characters")
 print("\n")
 # print("Detected text: " + str(txt))
-
+"""
 if len(txt) > 5:
     results += "Remember: Facebook prefers little or no text on ad"
 print(results)
+"""
