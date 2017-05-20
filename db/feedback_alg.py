@@ -97,8 +97,9 @@ for x in txt:
     if x in alpha_list:
         length += 1
 print("\n")
-print("The amount of text on your ad is: " + str(length) + " characters")
-print("\n")
+if str(length) < 1:
+    print("The amount of text on your ad is: " + str(length) + " characters")
+    print("\n")
 # print("Detected text: " + str(txt))
 """
 if len(txt) > 5:

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.3'
 
 gem 'rails', '4.2.5'
 gem 'devise'
@@ -22,7 +22,7 @@ gem 'fog'
 gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'sqlite3'
+  gem 'pg'
   gem 'web-console', group: :development
 end
 

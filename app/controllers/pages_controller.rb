@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   include PagesHelper
   layout 'application'
+  
   def index
       @ad = Ad.new
       @images = Ad.all.order('created_at DESC')

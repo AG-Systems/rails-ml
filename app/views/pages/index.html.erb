@@ -4,11 +4,11 @@
 	  <br/>
 	  <br/>
 	  <div class="alert alert-success card-images" role="alert">
-		  <strong>Well done!</strong> You <b>unlimited</b> uploads this month! 
+		  <strong>Well done!</strong> You have <b>unlimited</b> uploads this month! 
 		</div>
 		<%= render :template => "pages/new" %>
 		<br/>
-		<h4 style="text-align: center;">Current stage: <b>Alpha</b></h4>
+	  <h4 style="text-align: center;">Current stage: <b>Alpha</b></h4> 
 		<br/>
 			<% @images.where(author:  current_user.email).each do |ad| %>
 			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>

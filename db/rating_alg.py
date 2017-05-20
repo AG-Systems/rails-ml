@@ -275,7 +275,10 @@ if str_label == "Do not run":
         print("You have too much text on your ad")
     if detect_color_image(img_name) == -1:
         print("Your ad colours are hard to tell by an computer")
-    
+    if score < 1:
+        print("Your ad is visually displeasing")
+    elif score < 2:
+        print("")
     pass
 else:
     if len(txt) > 10:
@@ -286,5 +289,5 @@ else:
                 temp += 1
         if temp == 0:
             print("If you choose to use text within your ad, it would be beneficial to utilize a call to action word or phrase.")
-    
+        
     pass
