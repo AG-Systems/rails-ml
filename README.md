@@ -54,6 +54,7 @@ For heroku:
 
     5) Ruby
 
-
+For google compute engine:
+      
 
 rails s -p $PORT -b $IP
