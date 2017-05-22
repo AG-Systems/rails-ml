@@ -24,5 +24,6 @@ module Workspace
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.initialize_on_precompile = false
     config.paths['app/views'] << "app/views/devise"
+    config.exceptions_app = self.routes
   end
 end

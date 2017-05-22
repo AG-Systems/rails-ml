@@ -1,3 +1,0 @@
-entrypoint: bundle exec rackup - $PORT
-env: flex
-runtime: ruby

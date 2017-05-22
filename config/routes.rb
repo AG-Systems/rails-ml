@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   resources :accounts
   resources :subscribers
   resources :ads
+  if Rails.env.production?
+     get '404', :to => 'pages#page_not_found'
+  end
 end
