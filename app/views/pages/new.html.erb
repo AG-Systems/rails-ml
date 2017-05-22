@@ -16,7 +16,7 @@
                  <div style="text-align: center;">
                      <label class="btn btn-info btn-file" style="text-align: center; width: 75%;">
                         Browse files
-                      <%= f.file_field :image, accept:'image/*', :style => "display: none", :id =>"my-file-selector", :required => true %>
+                      <%= f.file_field :image, accept:'image/*', :style => "display: none", :id =>"my-file-selector", :required => true, onChange:"load_image(this.id,this.value)" %>
                       <% if f.object.image? %>
                         <%= image_tag f.object.image.thumb.url %>
                         <%= f.label :remove_image %>
@@ -57,7 +57,40 @@
     $('#my-file-selector').on('change',function(){
           $('#upload-file-info').val(this.files && this.files.length ?
           this.files[0].name : this.value.replace(/^C:\\fakepath\\/i, ''))
-          
+          console.log(this.files[0].size)
+          if(this.files[0].size > 100000)
+          {
+               alert("File is too big!");
+               $("#upload-file-info").val('');
+               this.value = "";
+          };         
           
         })
+</script>
+
+<script type="text/javascript">
+function load_image(id,ext)
+{
+   if(validateExtension(ext) == false)
+   {
+      alert("Must be an image file: jpg, jpeg, png, or gif");
+      // document.getElementById("upload-file-info").focus();
+      $("#my-file-selector").replaceWith($("#my-file-selector").val('').clone(true));
+      $("#my-file-selector").val('');
+      $("#upload-file-info").val('');
+      return;
+   }
+}
+
+function validateExtension(v)
+{
+      var allowedExtensions = new Array("jpg","JPG","jpeg","JPEG", "PNG", "png", "GIF", "gif");
+      for(var ct=0;ct<allowedExtensions.length;ct++)
+      {
+          sample = v.lastIndexOf(allowedExtensions[ct]);
+          if(sample != -1){return true;}
+      }
+      return false;
+}
+
 </script>
