@@ -56,5 +56,6 @@ For heroku:
 
 For google compute engine:
       
-
+      RAILS_ENV=production <ex: rake db:migrate>
+      
 rails s -p $PORT -b $IP
