@@ -1,5 +1,18 @@
 
-			
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <!-- <span class="close">&times;</span> -->
+    <img src="https://s3-us-west-1.amazonaws.com/techauriga/static_img/loading1.gif" id="loading-gif" class="img-responsive" style="margin: 0 auto;"/>
+    <div class="container-images" class="img-responsive" style="text-align: center; width: 70%; margin: 0 auto; background-color: transparent; color: white;">
+                <h3>Your ad is being processed</h3>
+                <p>Please wait 1-2 minutes</p>
+                <p>Do not <b>refresh</b> the page</p>
+    </div>
+  </div>
+
+</div>
         <div>
       <%= form_for(@ad, :html => {:id => "testupload"}) do |f| %>
 
@@ -45,7 +58,11 @@
                     <p style="font-size: 16px">Anything below 5 is bad</p>   
                   <br/>
                   <div style="text-align: center;">
+                      <% if current_user.ready %>
                       <%= f.submit "Submit ad", :class => 'btn btn-success', :style => "width: 75%", data: { disable_with: "Please wait..." } %>
+                      <% else %>
+                         <button type="button" class="btn btn-danger disabled">Please wait for your previews ad to finish</button>
+                      <% end %>
                   </div>
                   <br/>
                 </div>
@@ -57,8 +74,9 @@
     $('#my-file-selector').on('change',function(){
           $('#upload-file-info').val(this.files && this.files.length ?
           this.files[0].name : this.value.replace(/^C:\\fakepath\\/i, ''))
-          console.log(this.files[0].size)
-          if(this.files[0].size > 100000)
+          var img_size = this.files[0].size / 10000;
+          console.log(img_size);
+          if(img_size > 370000)
           {
                alert("File is too big!");
                $("#upload-file-info").val('');
@@ -93,4 +111,19 @@ function validateExtension(v)
       return false;
 }
 
+</script>
+
+<script>
+   var isupload = false;
+    $(".btn-success").click(function()
+    {
+        
+        if($("#upload-file-info").val() !== "")
+        {
+            var modal = document.getElementById('myModal');
+            $("#myModal").fadeIn(500).css("display","block");
+            // modal.style.display = "block";
+            isupload = true;
+        }
+    });
 </script>
