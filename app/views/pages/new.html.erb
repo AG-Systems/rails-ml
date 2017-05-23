@@ -43,7 +43,8 @@
                     </div>
                       </div>
                   </div>
-                    <h3><%= f.text_field :title, class: "input-max", :required => true, placeholder:"Title of your ad" %></h3>
+                    <h3><%= f.text_field :title, class: "input-max", :required => true, placeholder:"Title of your ad", :autocomplete => :off, :maxlength => 35  %></h3>
+                    <div id="input-valid"></div>
 										<p><b>Feedback: </b></p>
 										<p style="font-size: 16px">Your feedback and info goes here</p>
                     <hr/>
@@ -59,7 +60,11 @@
                   <br/>
                   <div style="text-align: center;">
                       <% if current_user.ready %>
-                      <%= f.submit "Submit ad", :class => 'btn btn-success', :style => "width: 75%", data: { disable_with: "Please wait..." } %>
+                          <% if current_user.limit > 0 || current_user.subscribed %>
+                              <%= f.submit "Submit ad", :class => 'btn btn-success', :style => "width: 75%", data: { disable_with: "Please wait..." } %>
+                          <% else %>
+                              <button type="button" class="btn btn-danger disabled">You are out of uploads for this month</button>
+                         <% end %>
                       <% else %>
                          <button type="button" class="btn btn-danger disabled">Please wait for your previews ad to finish</button>
                       <% end %>
@@ -70,6 +75,27 @@
          <%= f.hidden_field :author, value: current_user.email %>
          <% end %>
         </div>
+<script type="text/javascript">
+    function valid_title() 
+    {
+        
+        var x, text;
+        alert();
+        // Get the value of the input field with id="numb"
+        x = document.getElementsByClassName("input-max").value;
+        text = "Only Alphabetic and number characters are allowed";
+        if(/\A[a-zA-Z0-9]*\z/).test(x))
+        {
+            alert();
+        }
+        else
+        {
+           // document.getElementById("demo").innerHTML = text;
+           document.getElementById("input-valid").innerHTML = text;
+           alert();
+        }
+    } 
+</script>
 <script>
     $('#my-file-selector').on('change',function(){
           $('#upload-file-info').val(this.files && this.files.length ?
@@ -114,16 +140,15 @@ function validateExtension(v)
 </script>
 
 <script>
-   var isupload = false;
     $(".btn-success").click(function()
     {
         
-        if($("#upload-file-info").val() !== "")
+        if($("#upload-file-info").val() !== "" && $(".input-max").val() !== "")
         {
             var modal = document.getElementById('myModal');
             $("#myModal").fadeIn(500).css("display","block");
             // modal.style.display = "block";
-            isupload = true;
         }
     });
+    
 </script>

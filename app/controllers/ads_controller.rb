@@ -17,11 +17,19 @@ class AdsController < ApplicationController
   
   def create
     @ad = Ad.new(post_params)
-    @ad.save #vertiy photo is jpeg,gif, or png
+    title_img = @ad.title
+    img_id = @ad.id
+    valid_title = true
+    if title_img.match(/\A[a-zA-Z0-9]*\z/).nil?
+        valid_title = false #if the title has anything other then a-z etc 
+    else
+       flash[:error] = 'Only Alphabetic and number characters are allowed'
+    end
     @user = User.find_by_email(@ad[:author])
     upload_limit = @user[:limit]
-    if @user.ready == true
+    if @user.ready == true && valid_title
       if upload_limit.to_i > 0 || @user.subscribed?
+        @ad.save #vertiy photo is jpeg,gif, or png
         @user.update_attributes(:ready => false)
         @ad.update_attributes(:feedback => "", :rating => "", :recon => "") #if image upload fails
         s3_path = "https://techauriga.s3.amazonaws.com/uploads/ad/image/#{@ad[:id]}/#{@ad[:image]}"
@@ -71,10 +79,12 @@ class AdsController < ApplicationController
           @user.update_attributes(:limit => number_uploads, :ready => true)
           redirect_to :action => :index
       else
+          # @ad.destroy  # destroy if not enough limits
+          flash[:error] = "Out of uploads for this month"
           redirect_to :action => :error
       end
      else
-       
+       # @ad.destroy # Destory if its not ready or valid title
    end 
       #redirect_to ads_path(@ad)
   end  # end of function
