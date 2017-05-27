@@ -1,52 +1,362 @@
 <% if user_signed_in? %>
   <% if current_user.subscribed? %>
 	  <!-- PAID USER -->
-	  <br/>
-	  <br/>
-	  <div class="alert alert-success card-images" role="alert">
-		  <strong>Well done!</strong> You have <b>unlimited</b> uploads this month! 
+		<div id="mySidenav" class="sidenav">
+		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		  <div id="welcome"style="text-align: center; color: white">
+		  	<p>Welcome </p><p style="font-size: 15px;"><%= current_user.email %></p>
+		  </div>
+			<div id='cssmenu'>
+			<ul>
+			   <li class='active'><a href='/'>Home</a></li>
+			   <li><a href='/results'>All Results</a></li>
+			   <li><a href='/subscribers'>Pricing</a></li>
+			   <li><a href='/support'>Support</a></li>
+			</ul>
+			</div>
 		</div>
-		<%= render :template => "pages/new" %>
+		
+		<!-- <span onclick="openNav()">open</span> -->
+		<button type="button" class="btn btn-default" aria-label="Left Align" onclick="openNav()"> 
+	  		<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+		</button>
+		
+		<div id="main2">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12" style="padding-left: 40px; padding-right: 40px; padding-top: 15px;">
+				<div class="col-md-12 col-sm-12 col-xs-12" style="background-color: rgba(209, 209, 209,.8); box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); border-radius: 5px;">
+				              <div class="dashboard_graph">
+				                <div class="row x_title">
+				                  <div class="col-md-6">
+				                    <h3>Most Recent Result<small></small></h3>
+														<% @images.where(author:  current_user.email).each do |ad| %>
+														
+
+				                  </div>
+				                  <div class="col-md-6">
+															
+
+				                  </div>				                  
+				                </div>
+				                	
+				                <div class="col-md-6 col-sm-6 col-xs-12">
+				                		<% if ad %>
+				                			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
+				                  	<% else %>
+				                  		<div>
+				                  			 <div class="card-images"> 
+							                    <img src={this.props.image} alt={this.props.title} id="ad-image"/>
+							                    <div class="container-images">
+							                        <h2><b>Title: {this.props.title}</b></h2>
+							                        <p><b>Feedback: </b></p>
+																			<p>Hi</p>
+							                  
+							                        <hr/>
+							                        <p><b>Rating: (Final score goes here)/10</b></p>
+							                    </div>
+							            </div>
+							            <br/>
+				                  			
+				                  		</div>
+				                  	<% end %>
+				                  <!-- <div style="height: 200px;"></div> -->
+				                  
+				                </div>
+												<% end %>
+				                <div class="col-md-6 col-sm-6 col-xs-12 bg-white">
+				                  <div class="x_title">
+				                    <!-- <h3>Perfomance</h3> -->
+				                    <div class="clearfix"></div>
+				                  </div>
+
+				                  <div class="col-md-12 col-sm-12 col-xs-12" style="margin: 0 auto;">
+				                  	<%= render :template => "pages/new" %>
+				                  </div>
+				                  
+				                  <div class="col-md-12 col-sm-12 col-xs-12">
+				                  		<br/>
+				                  			
+															<div class="alert alert-success card-images">
+															  <strong>Congratulations</strong> You are <b>subscribed</b>!!
+															  <br/>
+															  
+															</div>
+				                  </div>
+				                  
+													
+				                </div>
+				
+				                <div class="clearfix"></div>
+				              </div>
+				            </div>
+				          
+			    	</div>
+			    </div>
+		    <br/> 
+						<!--
+				<div class="row" style="padding-left: 22px; padding-right: 22px; padding-top: 10px;">
+            <div class="col-md-4 col-sm-4 col-xs-12" style="">
+              <div class="x_panel tile fixed_height_320" style="background-color: white">
+                <div class="x_title">
+                  <h4 style="text-align: center; padding-top: 15px">Upload New Ad</h4>
+	                  <div style="margin: 0 auto; text-align: center; padding-top: 15px;">
+	                  	
+	                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12" >
+              <div class="x_panel tile fixed_height_320 overflow_hidden" style="background-color: white">
+                <div class="x_title">
+                  <h4>Device Usage</h4>
+                  <hr>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+    
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320" style="background-color: white">
+                <div class="x_title">
+                  <h4>Quick Settings</h4>
+                  <hr>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                </div>
+              </div> 
+            </div> 
+</div> --><!-- end of row -->
+		</div> <!-- End of main div -->
 		<br/>
-	  <h4 style="text-align: center;">Current stage: <b>Alpha</b></h4> 
 		<br/>
-			<% @images.where(author:  current_user.email).each do |ad| %>
-			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
-			<% end %>
 <% else %>
 <!-- NOT PAID -->
-<br/>
-<br/>
-	  <% if current_user.limit > 0 %>		
-			<div class="alert alert-warning card-images">
-			  <strong>Warning!</strong> You have <b><%= current_user.limit %> uploads </b> left for this month
-			  <br/>
-			  <a href="/subscribers"><button class="btn btn-warning">Subscribe</button></a>
+		<div id="mySidenav" class="sidenav">
+		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		  <div id="welcome"style="text-align: center; color: white">
+		  	<p>Welcome </p><p style="font-size: 15px;"><%= current_user.email %></p>
+		  </div>
+			<div id='cssmenu'>
+			<ul>
+			   <li class='active'><a href='/'>Home</a></li>
+			   <li><a href='/results'>All Results</a></li>
+			   <li><a href='/subscribers'>Pricing</a></li>
+			   <li><a href='/support'>Support</a></li>
+			</ul>
 			</div>
-		<% else %>
-			<div class="alert alert-danger card-images">
-			  <strong>Warning!</strong> You have 0 uploads left for this month
-			  <br/>
-			  <a href="/subscribers"><button class="btn btn-danger">Subscribe</button></a>
-			</div>
-			<script>
-				alert("You have 0 uploads left for this month");
-			</script>
-		<% end %>
-		<%= render :template => "pages/new" %>
-		<br/>
-		<h4 style="text-align: center;">Current stage: <b>Alpha</b></h4>
-		<br/>
-			<% @images.where(author:  current_user.email).each do |ad| %>
-			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
-		<% end %>
+		</div>
+		
+		<!-- <span onclick="openNav()">open</span> -->
+		<button type="button" class="btn btn-default" aria-label="Left Align" onclick="openNav()"> 
+	  		<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+		</button>
+		
+		<div id="main2">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12" style="padding-left: 40px; padding-right: 40px; padding-top: 15px;">
+				<div class="col-md-12 col-sm-12 col-xs-12" style="background-color: rgba(209, 209, 209,.8); box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); border-radius: 5px;">
+				              <div class="dashboard_graph">
+				                <div class="row x_title">
+				                  <div class="col-md-6">
+				                    <h3>Most Recent Result<small></small></h3>
+														
 
+				                  </div>
+				                  <div class="col-md-6">
+															
+
+				                  </div>				                  
+				                </div>
+				                	<!-- view -->
+				                <div class="col-md-6 col-sm-6 col-xs-12">
+														<% @images.where(author:  current_user.email).each do |ad| %>				                		
+				                			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
+				                  		<% end %>
+				                  	<% if @images.where(author: current_user.email)%>
+				                  		<div>
+				                  			 <div class="card-images"> 
+							                     <div style="width: 100%; height: 150px; background-color: #939393;" class="details">
+                           						<div style="text-align: center; color: white; line-height: 150px; font-size: 25px;">Example ad</div>
+                        						</div>
+							                    <div class="container-images">
+							                        <h2><b>Title of your ad</b></h2>
+							                        <p><b>Feedback: </b></p>
+																			<p>Hi</p>
+							                  
+							                        <hr/>
+							                        <p><b>Rating: (Final score goes here)/10</b></p>
+							                    </div>
+											            </div>
+											            <br/>
+				                  			
+				                  		</div>
+				                  	
+				                  	
+				                  <!-- <div style="height: 200px;"></div> -->
+				                  
+				                </div>
+												<% end %>
+				                <div class="col-md-6 col-sm-6 col-xs-12 bg-white">
+				                  <div class="x_title">
+				                    <!-- <h3>Perfomance</h3> -->
+				                    <div class="clearfix"></div>
+				                  </div>
+
+				                  <div class="col-md-12 col-sm-12 col-xs-12" style="margin: 0 auto;">
+				                  	<%= render :template => "pages/new" %>
+				                  </div>
+				                  
+				                  <div class="col-md-12 col-sm-12 col-xs-12">
+				                  		<br/>
+				                  		<% if current_user.limit > 0 %>		
+															<div class="alert alert-warning card-images">
+															  <strong>Warning!</strong> You have <b><%= current_user.limit %> uploads </b> left for this month
+															  <br/>
+															  <a href="/subscribers"><button class="btn btn-warning">Subscribe</button></a>
+															</div>
+														<% else %>
+															<div class="alert alert-danger card-images">
+															  <strong>Warning!</strong> You have 0 uploads left for this month
+															  <br/>
+															  <a href="/subscribers"><button class="btn btn-danger">Subscribe</button></a>
+															</div>
+															<script>
+																alert("You have 0 uploads left for this month");
+															</script>
+														<% end %>
+				                  </div>
+				                  
+													
+				                </div>
+				
+				                <div class="clearfix"></div>
+				              </div>
+				            </div>
+				          
+			    	</div>
+			    </div>
+		    <br/> 
+						<!--
+				<div class="row" style="padding-left: 22px; padding-right: 22px; padding-top: 10px;">
+            <div class="col-md-4 col-sm-4 col-xs-12" style="">
+              <div class="x_panel tile fixed_height_320" style="background-color: white">
+                <div class="x_title">
+                  <h4 style="text-align: center; padding-top: 15px">Upload New Ad</h4>
+	                  <div style="margin: 0 auto; text-align: center; padding-top: 15px;">
+	                  	
+	                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12" >
+              <div class="x_panel tile fixed_height_320 overflow_hidden" style="background-color: white">
+                <div class="x_title">
+                  <h4>Device Usage</h4>
+                  <hr>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+    
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320" style="background-color: white">
+                <div class="x_title">
+                  <h4>Quick Settings</h4>
+                  <hr>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                </div>
+              </div> 
+            </div> 
+</div> --><!-- end of row -->
+		</div> <!-- End of main div -->
+		<br/>
 <% end %>
 <% else %>
 <body id="login">
-<% if false %>
 
-<% end %>
 	<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
 
@@ -81,7 +391,7 @@
 			</div>  --><!-- /row -->
 			<br/>
 			<br/>
-			 <div class="card-images" style="background-color: rgba(0, 187, 255,0.2)">
+			 <div class="card-images" style="background-color: rgba(0, 187, 255,0.2); width: 35%; min-width: 300px;">
               <img src="http://placehold.it/350x150" alt="" id="ad-image"/>
                 <div class="container-images" style="background-color: transparent;">
                     <h3><b>Insert your ad here</b></h3>

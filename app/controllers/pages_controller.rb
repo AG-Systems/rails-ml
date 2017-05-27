@@ -4,13 +4,17 @@ class PagesController < ApplicationController
   
   def index
       @ad = Ad.new
-      @images = Ad.all.order('created_at DESC')
+      @images = Ad.all.order('created_at DESC').limit(1)
+
   end
 
   def new
       @ad = Ad.new
   end
   
+  def results
+      @images = Ad.all.order('created_at DESC')
+  end
   #def create
    #   @ad = Ad.new(post_params)
     #  result = `python db/script.py`

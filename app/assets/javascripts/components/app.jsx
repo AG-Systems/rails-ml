@@ -15,19 +15,19 @@ class Post extends React.Component {
   }
   render() {
     return(
-        <div>
-            <div className="card-images">
-                <img src={this.props.image} alt={this.props.title} id="ad-image"/>
-                <div className="container-images">
-                    <h2><b>Title: {this.props.title}</b></h2>
-                    <p><b>Feedback: </b></p>
-                    {this.state.feedback.split("\n").map(i => {
-                          return <p>{i}</p>;
-                    })}
-              
-                    <hr/>
-                    <p><b>Rating: {this.props.rating}/10</b></p>
-                </div>
+           <div>
+            <div className="card-images"> 
+                    <img src={this.props.image} alt={this.props.title} id="ad-image"/>
+                    <div className="container-images">
+                        <h2><b>Title: {this.props.title}</b></h2>
+                        <p><b>Feedback: </b></p>
+                        {this.state.feedback.split("\n").map(i => {
+                              return <p>{i}</p>;
+                        })}
+                  
+                        <hr/>
+                        <p><b>Rating: {this.props.rating}/10</b></p>
+                    </div>
             </div>
             <br/>
         </div>

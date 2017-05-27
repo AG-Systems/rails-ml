@@ -1,0 +1,50 @@
+<% if user_signed_in? %>
+	  <!-- LOGGED IN USER -->
+		<div id="mySidenav" class="sidenav">
+		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		  <div id="welcome"style="text-align: center; color: white">
+		  	<p>Welcome </p><p style="font-size: 15px;"><%= current_user.email %></p>
+		  </div>
+			<div id='cssmenu'>
+			<ul>
+			   <li><a href='/'>Home</a></li>
+			   <li class="active"><a href='#'>All Results</a></li>
+			   <li><a href='/subscribers'>Pricing</a></li>
+			   <li><a href='/support'>Support</a></li>
+			</ul>
+			</div>
+		</div>
+		
+		<!-- <span onclick="openNav()">open</span> -->
+		<button type="button" class="btn btn-default" aria-label="Left Align" onclick="openNav()"> 
+	  		<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+		</button>
+		
+		<div id="main2">
+			<h2 style="text-align: center; color: white">All Upload Results</h2>
+			<div style="margin: 0 auto; width: 35%; min-width: 300px;">
+			<% @images.where(author:  current_user.email).each do |ad| %>
+										<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
+									<% end %>
+			</div>
+		    <br/> 
+<!--
+				<div class="row" style="padding-left: 22px; padding-right: 22px; padding-top: 10px;">
+            <div class="col-md-4 col-sm-4 col-xs-12" style="">
+              <div class="x_panel tile fixed_height_320" style="background-color: white">
+                <div class="x_title">
+                  <h4 style="text-align: center; padding-top: 15px">Upload New Ad</h4>
+	                  <div style="margin: 0 auto; text-align: center; padding-top: 15px;">
+	                  	
+	                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+                </div>
+              </div>
+            </div>
+</div> <!-- end of row -->
+		</div> <!-- End of main div -->
+<% end %>

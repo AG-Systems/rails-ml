@@ -13,7 +13,6 @@
   </div>
 
 </div>
-        <div>
       <%= form_for(@ad, :html => {:id => "testupload"}) do |f| %>
 
             <div class="card-images previews">
@@ -21,10 +20,10 @@
             <% @ad.errors.full_messages.each do |error| %>
                <li class="alert alert-danger card-images"><%= error %></li>
             <% end %>
-         </ul>               
+         </ul>         <!--      
                         <div style="width: 100%; height: 150px; background-color: #939393;" class="details">
                            <div style="text-align: center; color: white; line-height: 150px; font-size: 25px;">Drag and drop image(alpha)</div>
-                        </div>
+                        </div> -->
                 <div class="container-images">
                  <div style="text-align: center;">
                      <label class="btn btn-info btn-file" style="text-align: center; width: 75%;">
@@ -38,26 +37,29 @@
                       </label>
                       <div>
                           File name:
-                    <div style="text-align: center;">
+                    <div style="text-align: center; height: 5px;">
                      <input type="text" id="upload-file-info" style="border: none;background-color: transparent; text-align:center;" readonly/> 
                     </div>
                       </div>
                   </div>
                     <h3><%= f.text_field :title, class: "input-max", :required => true, placeholder:"Title of your ad", :autocomplete => :off, :maxlength => 35  %></h3>
+                    <!--
                     <div id="input-valid"></div>
 										<p><b>Feedback: </b></p>
 										<p style="font-size: 16px">Your feedback and info goes here</p>
                     <hr/>
+                    -->
                     <!--
                     <p><b>Image Recognition:</b></p>
 						<p style="font-size: 16px">See how recognizable your image is</p>
 						<p style="font-size: 16px">Shows the top 5 guesses</p>
                     <hr/>
                     -->
+                    <!--
                     <p>Rating: 10/10</p>
                     <p style="font-size: 16px">Anything above 5 is good</p>
                     <p style="font-size: 16px">Anything below 5 is bad</p>   
-                  <br/>
+                  <br/> -->
                   <div style="text-align: center;">
                       <% if current_user.ready %>
                           <% if current_user.limit > 0 || current_user.subscribed %>
@@ -74,28 +76,6 @@
             </div>
          <%= f.hidden_field :author, value: current_user.email %>
          <% end %>
-        </div>
-<script type="text/javascript">
-    function valid_title() 
-    {
-        
-        var x, text;
-        alert();
-        // Get the value of the input field with id="numb"
-        x = document.getElementsByClassName("input-max").value;
-        text = "Only Alphabetic and number characters are allowed";
-        if(/\A[a-zA-Z0-9]*\z/).test(x))
-        {
-            alert();
-        }
-        else
-        {
-           // document.getElementById("demo").innerHTML = text;
-           document.getElementById("input-valid").innerHTML = text;
-           alert();
-        }
-    } 
-</script>
 <script>
     $('#my-file-selector').on('change',function(){
           $('#upload-file-info').val(this.files && this.files.length ?
@@ -145,8 +125,8 @@ function validateExtension(v)
         
         if($("#upload-file-info").val() !== "" && $(".input-max").val() !== "")
         {
-            var modal = document.getElementById('myModal');
-            $("#myModal").fadeIn(500).css("display","block");
+            //var modal = document.getElementById('myModal');
+            // $("#myModal").fadeIn(500).css("display","block");
             // modal.style.display = "block";
         }
     });

@@ -24,6 +24,7 @@ class AdsController < ApplicationController
         valid_title = false #if the title has anything other then a-z etc 
     else
        flash[:error] = 'Only Alphabetic and number characters are allowed'
+       
     end
     @user = User.find_by_email(@ad[:author])
     upload_limit = @user[:limit]
@@ -47,6 +48,7 @@ class AdsController < ApplicationController
         rescue
             classify = "Image must be a jpg for image recognition to work. Stay tuned!"
         end
+          
           result = `python db/feedback_alg.py  #{image_path}`
           ad_rating = `python db/rating_alg.py #{image_path} #{@ad[:id]}`
           if classify.length >= 500

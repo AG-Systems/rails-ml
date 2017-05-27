@@ -8,4 +8,5 @@ class RegistrationsController < Devise::RegistrationsController
         #'/subscribers/new'
         '/'
     end
+    
 end
