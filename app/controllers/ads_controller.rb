@@ -5,11 +5,13 @@ class AdsController < ApplicationController
   layout 'application'
   
   def index
-      @ad = Ad.new
+      @ad = Ad.new 
+      
   end
 
-  def new
+  def new 
       @ad = Ad.new
+      
   end
   
   def error
