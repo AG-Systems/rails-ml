@@ -150,9 +150,10 @@ convnet = regression(convnet, optimizer='adam', learning_rate=LR, loss='categori
 model = tflearn.DNN(convnet, tensorboard_dir='log')
 
 
-
+model_exists = False
 if os.path.exists('{}.meta'.format(MODEL_NAME)):
     model.load(MODEL_NAME)
+    model_exists = True
     #print('model loaded!')
     pass
 
@@ -164,11 +165,11 @@ Y = [i[1] for i in train]
 
 test_x = np.array([i[0] for i in test]).reshape(-1,IMG_SIZE,IMG_SIZE,1)
 test_y = [i[1] for i in test]
-
-model.fit({'input': X}, {'targets': Y}, n_epoch=10, validation_set=({'input': test_x}, {'targets': test_y}), 
-    snapshot_step=500, show_metric=True, run_id=MODEL_NAME)
-
-model.save(MODEL_NAME)
+if not model_exists:
+    model.fit({'input': X}, {'targets': Y}, n_epoch=10, validation_set=({'input': test_x}, {'targets': test_y}), 
+        snapshot_step=500, show_metric=True, run_id=MODEL_NAME)
+    
+    model.save(MODEL_NAME)
 
 # TESTING
 test_data = process_test_data()
