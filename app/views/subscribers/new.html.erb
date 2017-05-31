@@ -42,25 +42,51 @@
 
 <br/>
 <br/>
-
-<div class="container">
-    <div class="card" style="background-color: #545454">
-      <img src="http://wallpapercave.com/wp/qb4Ddyc.jpg" alt="Avatar" style="width:100%" >
-      <div class="container">
-        <h2>Premium</h2>
-        <p>Get unlimited uploads</p>
-        <p></p>
-        <%= render 'form' %>
+<% if not current_user.subscribed? %>
+  <div class="container">
+      <div class="card" style="background-color: #545454">
+        <img src="http://wallpapercave.com/wp/qb4Ddyc.jpg" alt="Avatar" style="width:100%" >
+        <div class="container">
+          <h2>Premium</h2>
+          <p>Get unlimited uploads</p>
+          <p></p>
+          <%= render 'form' %>
+        </div>
       </div>
-    </div>
-</div>
+  </div>
+<% else %>
+  <div class="container">
+      <div class="card" style="background-color: #545454">
+        <img src="http://wallpapercave.com/wp/qb4Ddyc.jpg" alt="Avatar" style="width:100%" >
+        <div class="container">
+          <h2>Premium</h2>
+          <p>You are already subscribed!!</p>
+          <script>
+                setTimeout(function (){
+
+                  window.location = "/";
+              
+                  }, 5000); 
+          </script>
+        </div>
+      </div>
+  </div>
+
+<% end %>
 <br/>
 <!--
 <hr/>
 -->
+<% if not current_user.subscribed? %>
 <div id="continue">
     <a href="/"><button class="btn btn-primary">Continue as free user</button></a>
 </div>
+<% else %>
+<div id="continue">
+    <a href="/"><button class="btn btn-primary">Click here to go back</button></a>
+</div>
+
+<% end %>
 <br/>
 <style>
     #continue
