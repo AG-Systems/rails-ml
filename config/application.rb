@@ -6,6 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+ActiveSupport.halt_callback_chains_on_return_false = false
 module Workspace
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -25,5 +26,6 @@ module Workspace
     config.assets.initialize_on_precompile = false
     config.paths['app/views'] << "app/views/devise"
     config.exceptions_app = self.routes
+    
   end
 end
