@@ -212,8 +212,8 @@
 				                <div class="col-md-6 col-sm-6 col-xs-12">
 														<% @images.where(author:  current_user.email).each do |ad| %>				                		
 				                			<%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.feedback, rating: ad.rating}, {prerender: true}) %>
-				                  		<% end %>
-				                  	<% if @images.where(author: current_user.email)%>
+				                  		
+				                  	<% if not ad %>
 				                  		<div>
 				                  			 <div class="card-images"> 
 							                     <div style="width: 100%; height: 150px; background-color: #939393;" class="details">
@@ -232,7 +232,7 @@
 				                  			
 				                  		</div>
 				                  	
-				                  	
+				                  	<% end %>
 				                  <!-- <div style="height: 200px;"></div> -->
 				                  
 				                </div>
