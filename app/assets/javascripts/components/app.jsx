@@ -13,12 +13,12 @@ class Post extends React.Component {
           console.log(this.state.feedback);
       });   
   }
-  render() {
+  render() { 
     return(
            <div>
             <div className="card-images"> 
                     <img src={this.props.image} alt={this.props.title} id="ad-image"/>
-                    <div className="container-images">
+                    <div className="container-images" s>
                         <h2><b>Title: {this.props.title}</b></h2>
                         <p><b>Feedback: </b></p>
                         {this.state.feedback.split("\n").map(i => {

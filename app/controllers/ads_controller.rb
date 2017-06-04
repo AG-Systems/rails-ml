@@ -85,7 +85,7 @@ class AdsController < ApplicationController
       else
           # @ad.destroy  # destroy if not enough limits
           flash[:error] = "Out of uploads for this month"
-          redirect_to :action => :error
+          redirect_to :action => :error 
       end
      else
        # @ad.destroy # Destory if its not ready or valid title
