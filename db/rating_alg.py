@@ -80,6 +80,8 @@ img_id = int(sys.argv[2])
 img_name = str(sys.argv[1])
 
 TRAIN_DIR = os.path.abspath('db/algorithm/train_imgs')
+POS_FOLDER = os.path.abspath('db/algorithm/train_imgs/positive')
+NEG_FOLDER = os.path.abspath('db/algorithm/train_imgs/negative')
 #TEST_DIR = os.path.abspath('test_imgs')
 TEST_DIR = os.path.abspath("public/uploads/" + str(img_id))
 IMG_SIZE = 100
@@ -96,11 +98,24 @@ def label_img(img):
 
 def create_train_data():
     training_data = []
+    """
     for img in os.listdir(TRAIN_DIR):
         label = label_img(img)
         path = os.path.join(TRAIN_DIR,img)
         img = cv2.resize(cv2.imread(path, cv2.IMREAD_GRAYSCALE), (IMG_SIZE,IMG_SIZE))
         training_data.append([np.array(img), np.array(label)])
+    """
+    for img in os.listdir(POS_FOLDER):
+        label = [1,0] #pos
+        path = os.path.join(POS_FOLDER,img)
+        img = cv2.resize(cv2.imread(path, cv2.IMREAD_GRAYSCALE), (IMG_SIZE,IMG_SIZE))
+        training_data.append([np.array(img), np.array(label)])
+    for img in os.listdir(NEG_FOLDER):
+        label = [0,1] #neg
+        path = os.path.join(NEG_FOLDER,img)
+        img = cv2.resize(cv2.imread(path, cv2.IMREAD_GRAYSCALE), (IMG_SIZE,IMG_SIZE))
+        training_data.append([np.array(img), np.array(label)])
+    shuffle(training_data)
     shuffle(training_data)
     np.save('train_data.npy', training_data)
     return training_data
