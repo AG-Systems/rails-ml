@@ -53,6 +53,16 @@ class AdsController < ApplicationController
           
           result = `python db/feedback_alg.py  #{image_path}`
           ad_rating = `python db/rating_alg.py #{image_path} #{@ad[:id]}`
+          number_uploads = @user[:limit]
+          if !current_user.subscribed
+            number_uploads = @user[:limit]
+            number_uploads -= 1
+          else
+            number_uploads = 1 #So users cant just pay and then cancel payment to get more uploads
+          end
+          @user.update_attributes(:limit => number_uploads, :ready => true)
+          
+          
           if classify.length >= 500
             print(classify.length)
             print(classify)
@@ -72,15 +82,7 @@ class AdsController < ApplicationController
           result += "\n #{feedback_rating}"
           result += "\n Results: #{run_status}"
           
-          number_uploads = @user[:limit]
-          if !current_user.subscribed
-            number_uploads = @user[:limit]
-            number_uploads -= 1
-          else
-            number_uploads = 1 #So users cant just pay and then cancel payment to get more uploads
-          end
           @ad.update_attributes(:feedback => result, :rating => ad_rating, :recon => classify)
-          @user.update_attributes(:limit => number_uploads, :ready => true)
           redirect_to :action => :index
       else
           # @ad.destroy  # destroy if not enough limits

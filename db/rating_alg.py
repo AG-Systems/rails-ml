@@ -5,52 +5,6 @@ from colorthief import ColorThief
 import tensorflow as tf
 import pytesser
 from colorthief import ColorThief
-"""
-score = 0
-
-def detect_color_image(file, thumb_size=40, MSE_cutoff=22, adjust_color_bias=True):
-    color_score = 0
-    pil_img = Image.open(file)
-    bands = pil_img.getbands()
-    if bands == ('R','G','B') or bands== ('R','G','B','A'):
-        thumb = pil_img.resize((thumb_size,thumb_size))
-        SSE, bias = 0, [0,0,0]
-        if adjust_color_bias:
-            bias = ImageStat.Stat(thumb).mean[:3]
-            bias = [b - sum(bias)/3 for b in bias ]
-        for pixel in thumb.getdata():
-            mu = sum(pixel)/3
-            SSE += sum((pixel[i] - mu - bias[i])*(pixel[i] - mu - bias[i]) for i in [0,1,2])
-        MSE = float(SSE)/(thumb_size*thumb_size)
-        if MSE <= MSE_cutoff:
-            print "grayscale\t",
-        else:
-            color_score += 2
-            #print "Color\t\t\t",
-        #print "( MSE=",MSE,")"
-    elif len(bands)==1:
-        # print "Black and white", bands
-        color_score += 1
-    else:
-        #print "Don't know...", bands
-        color_score -= 1
-    return color_score
-
-calltoaction = ["start", "stop","build","join","learn","discover","you", "me", "my", "want", "need", "free", "save", "try", "you"]
-imgurl = str(sys.argv[1])
-score += detect_color_image(imgurl)
-color_thief = ColorThief(imgurl)
-rgb = color_thief.get_color(quality=1)
-
-txt = pytesser.image_to_string(imgurl)
-txt = txt.replace('\n', ' ').replace('\r', '')
-txt = txt.split()
-for x in txt:
-    if x.lower() in calltoaction:
-        score += 1
-        break
-#print(score)
-"""
 
 # NERUAL NET
 
@@ -115,7 +69,6 @@ def create_train_data():
         path = os.path.join(NEG_FOLDER,img)
         img = cv2.resize(cv2.imread(path, cv2.IMREAD_GRAYSCALE), (IMG_SIZE,IMG_SIZE))
         training_data.append([np.array(img), np.array(label)])
-    shuffle(training_data)
     shuffle(training_data)
     np.save('train_data.npy', training_data)
     return training_data
@@ -285,16 +238,13 @@ print("RATING_FEEDBACK")
 
 txt = pytesser.image_to_string(str(sys.argv[1]))
 txt = txt.replace('\n', ' ').replace('\r', '')
+# obj_results = os.system("python db/classify_image.py" + " " + TEST_DIR + "/" + img_name)
 calltoaction = ["start", "stop","build","join","learn","discover","you", "me", "my", "want", "need", "free", "save", "try", "you"]
 if str_label == "Do not run":
     if len(txt) > 50:
         print("You have too much text on your ad")
     if detect_color_image(img_name) == -1:
         print("Your ad colours are hard to tell by an computer")
-    if score < 1:
-        print("Your ad is visually displeasing")
-    elif score < 2:
-        print("")
     pass
 else:
     if len(txt) > 10:

@@ -17,7 +17,7 @@ class Post extends React.Component {
     return(
            <div>
             <div className="card-images"> 
-                    <img src={this.props.image} alt={this.props.title} id="ad-image"/>
+                    <img src={this.props.image} alt={this.props.title} id="pic-image"/>
                     <div className="container-images" s>
                         <h2><b>Title: {this.props.title}</b></h2>
                         <p><b>Feedback: </b></p>
