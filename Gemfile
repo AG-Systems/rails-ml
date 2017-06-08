@@ -17,6 +17,7 @@ gem 'jquery-rails'
 gem "react-rails"
 gem 'rails_admin'
 gem 'turbolinks'
+gem 'd3-rails', '~> 3.5.17'
 gem 'jbuilder', '~> 2.0'
 gem 'fog'
 gem 'sdoc', '~> 0.4.0', group: :doc

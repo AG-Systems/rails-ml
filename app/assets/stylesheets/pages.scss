@@ -200,12 +200,12 @@
       transition: margin-left .5s;
 
 }
-
-
-
-
-
-
-
+.bar {
+    background: blue;
+    height: 30px;
+    color: white;
+} 
+.progress {background: rgba(245, 245, 245, 1); border: 2px solid rgba(0, 0, 0, 1); border-radius: 3px; height: 26px;}
+.progress-bar-custom {background: rgba(42, 131, 209, 1);}
 
 

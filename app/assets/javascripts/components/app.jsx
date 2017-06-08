@@ -1,17 +1,23 @@
+
 class Post extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      feedback: 'Loading...'
+      feedback: 'Loading...',
+      calltoaction: 'Loading....'
     };
   }
   componentDidMount() 
   {
       this.setState({feedback: this.props.feed}, function() 
       {
-          console.log(this.state.feedback);
-      });   
+          console.log(this.state.feedback * 100);
+      }); 
+      this.setState({calltoaction: this.props.calltoaction}, function() 
+      {
+          console.log(this.state.calltoaction * 10);
+      });  
   }
   render() { 
     return(
@@ -21,12 +27,28 @@ class Post extends React.Component {
                     <div className="container-images" s>
                         <h2><b>Title: {this.props.title}</b></h2>
                         <p><b>Feedback: </b></p>
-                        {this.state.feedback.split("\n").map(i => {
-                              return <p>{i}</p>;
-                        })}
-                  
+                        <p>Clarity of ad: {this.state.feedback * 100}%</p>
+                        <div className="progress">
+                          <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.state.feedback * 100} 
+                          aria-valuemin="0" aria-valuemax="100" style={{width:this.state.feedback * 100 + "%"}}>
+                          </div>
+                        </div>
+                        <p>Call to action: {this.state.calltoaction* 10}%</p>
+                        <div className="progress">
+                          <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.state.calltoaction * 10} 
+                          aria-valuemin="0" aria-valuemax="100" style={{width:this.props.calltoaction * 10 + "%"}}>
+                          </div>
+                        </div>     
+
+                        <p>Attention: {this.props.colorstatus * 10}%</p>
+                        <div className="progress">
+                          <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.props.colorstatus * 10} 
+                          aria-valuemin="0" aria-valuemax="100" style={{width:this.props.colorstatus * 10 + "%"}}>
+                          </div>
+                        </div>                         
+                        <p><b>{this.props.status} this ad </b></p>
                         <hr/>
-                        <p><b>Rating: {this.props.rating}/10</b></p>
+                        <p><b>Overall Rating: {this.props.rating}/10</b></p>
                     </div>
             </div>
             <br/>
@@ -34,6 +56,11 @@ class Post extends React.Component {
         )   
   }
 }
+
+
+
+
+
 /*
 
 class Paid extends React.Component {
@@ -94,3 +121,4 @@ class Paid extends React.Component {
         })
         
   */
+  
