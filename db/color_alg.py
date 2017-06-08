@@ -29,7 +29,8 @@ def detect_color_image(file, thumb_size=40, MSE_cutoff=22, adjust_color_bias=Tru
             SSE += sum((pixel[i] - mu - bias[i])*(pixel[i] - mu - bias[i]) for i in [0,1,2])
         MSE = float(SSE)/(thumb_size*thumb_size)
         if MSE <= MSE_cutoff:
-            print "grayscale\t",
+            #print "grayscale\t",
+            pass
         else:
             color_score += 2
             #print "Color\t\t\t",

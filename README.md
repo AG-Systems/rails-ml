@@ -58,4 +58,11 @@ For google compute engine:
       
       RAILS_ENV=production <ex: rake db:migrate>
       
-rails s -p $PORT -b $IP
+for c9:
+
+
+    rails s -p $PORT -b $IP
+    
+For full indepth guide:
+
+    Open indepth.md
