@@ -2,7 +2,7 @@ class AdsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   include PagesHelper
   require 'open-uri'
-  require 'digest/sha1'
+  include CarrierWave::MiniMagick
   layout 'application'
   
   def index
@@ -41,7 +41,8 @@ class AdsController < ApplicationController
         Dir.mkdir(directory_name) unless File.exists?(directory_name)
         IO.copy_stream(open(s3_path), "public/uploads/#{@ad[:id]}/#{@ad[:image]}")
         image_path = "public/uploads/#{@ad[:id]}/#{@ad[:image]}"
-
+        image = MiniMagick::Image.new(image_path)
+        image.format "jpg"
         classify = `python db/classify_image.py --image_file #{image_path}`
         ad_rating = `python db/rating_alg.py #{image_path} #{@ad[:id]}`
         calling = `python db/feedback_alg.py #{image_path}`

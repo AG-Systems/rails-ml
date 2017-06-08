@@ -34,7 +34,9 @@
                </div>
                <div class="col-md-6 col-sm-6 col-xs-12">
                   <% @images.where(author:  current_user.email).each do |ad| %>				                		
-                  <%= react_component("Post", {title: ad.title, image: ad.image.url, feed: ad.recon, rating: ad.rating, status: ad.adstatus, calltoaction: ad.feedback}, {prerender: true}) %>
+                  <%= react_component("Post", {
+                  title: ad.title, image: ad.image.url, feed: ad.recon, rating: ad.rating, status: ad.adstatus, 
+                  calltoaction: ad.feedback, colorstatus: ad.adcolor}, {prerender: true}) %>
                   <% end %>
                   <% if @images.where(author:  current_user.email).length == 0 %>
                   <div>
