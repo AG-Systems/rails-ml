@@ -26,9 +26,11 @@ Python dependencies:
       tqdm
 Linux dependencies:
 
-
     tesseract-ocr
-
+    
+    imagemagick
+    
+    libmagickwand-dev
 
 For heroku:
 
