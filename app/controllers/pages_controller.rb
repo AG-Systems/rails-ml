@@ -13,7 +13,7 @@ class PagesController < ApplicationController
   end
   
   def results
-      @images = Ad.all.order('created_at DESC')
+      @images = Ad.all.order('created_at DESC') 
   end
   #def create
    #   @ad = Ad.new(post_params)

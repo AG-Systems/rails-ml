@@ -59,10 +59,17 @@ class AdsController < ApplicationController
           run_score = ad_rating[Integer(ad_rating.index('RATING_SCORE')) + 13..-1]
           puts "Results: " + run_result
           puts "Classify: " + classify
-          puts "Call to action: " + calling
-          puts "Color status:" + color_status
+          puts "Ad memorability: " + calling
+          puts "Attention Grab:" + color_status
           ad_type = classify[0..Integer(classify.index('('))-1]
           classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5]
+          if classify.to_f > 0.70
+            calling.chomp
+            calling = String(Float(calling) + 1.5)
+          end
+          if Float(calling) > 10.0
+            calling = "10.0"
+          end
           @ad.update_attributes(:feedback => calling, :rating => run_score, :recon => classify.chomp, :adtype => ad_type, :adstatus => run_result.chomp, :adcolor => color_status.chomp)
           redirect_to :action => :index
       else

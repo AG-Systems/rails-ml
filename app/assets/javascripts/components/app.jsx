@@ -19,6 +19,10 @@ class Post extends React.Component {
           console.log(this.state.calltoaction * 10);
       });  
   }
+  help()
+  {
+     document.getElementById("helpfeedback").style.display = "block";
+  }
   render() { 
     return(
            <div>
@@ -27,20 +31,20 @@ class Post extends React.Component {
                     <div className="container-images" s>
                         <h2><b>Title: {this.props.title}</b></h2>
                         <p><b>Feedback: </b></p>
-                        <p>Clarity of ad: {this.state.feedback * 100}%</p>
+                        <p>Clarity of ad: {this.state.feedback * 100}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
                         <div className="progress">
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.state.feedback * 100} 
                           aria-valuemin="0" aria-valuemax="100" style={{width:this.state.feedback * 100 + "%"}}>
                           </div>
                         </div>
-                        <p>Call to action: {this.state.calltoaction* 10}%</p>
+                        <p>Ad Memorability: {this.state.calltoaction* 10}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
                         <div className="progress">
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.state.calltoaction * 10} 
                           aria-valuemin="0" aria-valuemax="100" style={{width:this.props.calltoaction * 10 + "%"}}>
                           </div>
                         </div>     
 
-                        <p>Attention: {this.props.colorstatus * 10}%</p>
+                        <p>Attention Grab: {this.props.colorstatus * 10}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
                         <div className="progress">
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.props.colorstatus * 10} 
                           aria-valuemin="0" aria-valuemax="100" style={{width:this.props.colorstatus * 10 + "%"}}>

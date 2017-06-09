@@ -22,13 +22,17 @@
 		
 		<div id="main2">
 			<h2 style="text-align: center; color: white">All Upload Results</h2>
-			<div style="margin: 0 auto; width: 35%; min-width: 300px;">
+			<div style="margin: 0 auto; width: 35%; min-width: 300px;" id="loadin">
 			<% @images.where(author:  current_user.email).each do |ad| %>
 								<%= react_component("Post", {
                   title: ad.title, image: ad.image.url, feed: ad.recon, rating: ad.rating, status: ad.adstatus, 
-                  calltoaction: ad.feedback, colorstatus: ad.adcolor}, {prerender: true}) %>
+                  calltoaction: ad.feedback, colorstatus: ad.adcolor}, {prerender: false}) %>
 									<% end %>
 			</div>
+			<script>
+				$("#loadin").hide();
+				$("#loadin").fadeIn(600);
+			</script>
 		    <br/> 
 <!--
 				<div class="row" style="padding-left: 22px; padding-right: 22px; padding-top: 10px;">
@@ -49,4 +53,9 @@
             </div>
 </div> <!-- end of row -->
 		</div> <!-- End of main div -->
+<% else %>
+<script>
+	window.location = "/";
+</script>
+
 <% end %>
