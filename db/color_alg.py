@@ -54,4 +54,5 @@ if color_results > 100:
 elif color_results > 50:
     attention_score += 1.5
 
+
 print(attention_score)

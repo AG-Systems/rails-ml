@@ -54,15 +54,15 @@ class AdsController < ApplicationController
           else
             number_uploads = 0 #So users cant just pay and then cancel payment to get more uploads
           end
-          @user.update_attributes(:limit => number_uploads, :ready => true)
-          run_result = ad_rating[Integer(ad_rating.index('RATING_CLASS')) + 12..Integer(ad_rating.index('RATING_SCORE'))-1]
-          run_score = ad_rating[Integer(ad_rating.index('RATING_SCORE')) + 13..-1]
+          @user.update_attributes(:limit => number_uploads, :ready => true) #Reduce the number of uploads by 1 and make it so they can upload again
+          run_result = ad_rating[Integer(ad_rating.index('RATING_CLASS')) + 12..Integer(ad_rating.index('RATING_SCORE'))-1] #Run this ad or not
+          run_score = ad_rating[Integer(ad_rating.index('RATING_SCORE')) + 13..-1] # Score
           puts "Results: " + run_result
           puts "Classify: " + classify
           puts "Ad memorability: " + calling
           puts "Attention Grab:" + color_status
-          ad_type = classify[0..Integer(classify.index('('))-1]
-          classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5]
+          ad_type = classify[0..Integer(classify.index('('))-1] #Maybe in the future, we can use this
+          classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5] #Image recon
           if classify.to_f > 0.70
             calling.chomp
             calling = String(Float(calling) + 1.5)
@@ -71,11 +71,11 @@ class AdsController < ApplicationController
             calling = "10.0"
           end
           @ad.update_attributes(:feedback => calling, :rating => run_score, :recon => classify.chomp, :adtype => ad_type, :adstatus => run_result.chomp, :adcolor => color_status.chomp)
-          redirect_to :action => :index
+          redirect_to :action => :index 
       else
           # @ad.destroy  # destroy if not enough limits
-          flash[:error] = "Out of uploads for this month"
-          redirect_to :action => :error 
+          flash[:error] = "Out of uploads for this month" 
+          redirect_to :action => :error  
       end
      else
        # @ad.destroy # Destory if its not ready or valid title

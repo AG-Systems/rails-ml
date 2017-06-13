@@ -51,7 +51,7 @@ class Post extends React.Component {
                           </div>
                         </div>                         
                         <p><b>{this.props.status} this ad </b></p>
-                        <hr/>
+                        <div id="break"></div>
                         <p><b>Overall Rating: {this.props.rating}/10</b></p>
                     </div>
             </div>

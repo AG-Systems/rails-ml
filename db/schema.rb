@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608092116) do
+ActiveRecord::Schema.define(version: 20170613082350) do
 
   create_table "ads", force: :cascade do |t|
     t.string   "title"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20170608092116) do
     t.boolean  "admin",                  default: false
     t.integer  "limit"
     t.boolean  "ready"
+    t.boolean  "focusui"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

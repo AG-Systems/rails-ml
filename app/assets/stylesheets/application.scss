@@ -528,22 +528,41 @@ background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, F
 
 .navbar {
 	background-color: #e4e6e5;
-	background-color: rgba( 228, 230, 229, .85 );
+	background-color: rgba( 33, 206, 153, 1 );
 	border-bottom: 0 none;
 	font-size: 12px;
 	transition: .25s all linear;
+	border-radius: 0px;
+
 }
 
 .navbar.inv {
 	background-color: rgba( 0, 0, 0, .5 );
-	border-bottom: 1px solid #bfbfbf;
+	/* border-bottom: 1px solid #bfbfbf; */
 }
-
 .navbar .nav a {
-	color: #5f5f5f;
+	 color: #5f5f5f; 
 	font-family: "Titillium Web", sans-serif;
 	font-weight: 600;
 	transition: all .5 linear;
+}
+.navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-default .navbar-brand {
+  color: #fff;
+}
+@media (max-width: 767px) {
+
+	.navbar {
+	    background-color: rgb( 33, 206, 153);
+	    padding: 0;
+	}
+
 }
 
 .navbar.inv a {
@@ -636,7 +655,7 @@ background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, F
 	}
 	
 	.navbar {
-		background-color: #e4e6e5 !important;
+		/* background-color: #e4e6e5; */
 		padding: 0;
 	}
 	
@@ -1249,7 +1268,7 @@ padding-top: 20px;
     /* background-color: #f9f9f9; */
     background-color: #efefef;
     border-radius: 5px;
-    word-break: break-all;
+    word-break: normal;
 }
 
 .card-images img
@@ -1337,4 +1356,12 @@ h2
 #ad-image
 {
 	
+	
+}
+
+#break
+{
+	width: 100%; 
+	height: 30px; 
+	background-color: transparent
 }

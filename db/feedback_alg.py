@@ -50,6 +50,7 @@ elif max_score - min_score > 50:
 else:
     counter += .25
 counter *= 1.5
+
 #counter += (total_score * .10)
 # print(unique_pixels)
 print(counter)
