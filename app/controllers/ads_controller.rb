@@ -54,7 +54,7 @@ class AdsController < ApplicationController
           else
             number_uploads = 0 #So users cant just pay and then cancel payment to get more uploads
           end
-          @user.update_attributes(:limit => number_uploads, :ready => true) #Reduce the number of uploads by 1 and make it so they can upload again
+          @user.update_attributes(:limit => number_uploads, :ready => true) #Reduce the number of uploads by 1 and make it so they can upload again 
           run_result = ad_rating[Integer(ad_rating.index('RATING_CLASS')) + 12..Integer(ad_rating.index('RATING_SCORE'))-1] #Run this ad or not
           run_score = ad_rating[Integer(ad_rating.index('RATING_SCORE')) + 13..-1] # Score
           puts "Results: " + run_result
