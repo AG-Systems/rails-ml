@@ -1,12 +1,16 @@
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
 $(document).ready(function () {
-    
+    if(window.screen.width >= 765)
+    {
+        $(".glyphicon-chevron-left").attr('class', '')
+    }
 });
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
     $("#main2").css("margin-left", "250px");
+    $("#sidenavbtn").attr('class', '')
     if(window.screen.width < 766)
     {
         $("p").hide();
@@ -19,6 +23,7 @@ function openNav() {
         $(".btn-warning").css("color", "transparent");
         $("#examplepic").css("color", "transparent");
         $(".row").css("pointer-events", "none");
+        $("#exampletext").hide();
     }
     if(window.screen.width <= 440)
     {
@@ -34,6 +39,7 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
     $("#main2").css("margin-left", "0px");
+    $("#sidenavbtn").attr('class', 'glyphicon glyphicon-chevron-left')
     if(window.screen.width < 766)
     {
         $("p").show();
@@ -47,6 +53,7 @@ function closeNav() {
         $(".btn-warning").css("color", "white");
         $("#examplepic").css("color", "white");
         $(".row").css("pointer-events", "auto");
+        $("#exampletext").show();
     }
     if(window.screen.width <= 440)
     {

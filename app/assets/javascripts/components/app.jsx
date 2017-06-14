@@ -21,16 +21,25 @@ class Post extends React.Component {
   }
   help()
   {
-     document.getElementById("helpfeedback").style.display = "block";
+    var x = document.getElementById('helpfeedback');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
   }
   render() { 
     return(
            <div>
             <div className="card-images"> 
                     <img src={this.props.image} alt={this.props.title} id="pic-image"/>
-                    <div className="container-images" s>
+                    <div className="container-images">
                         <h2><b>Title: {this.props.title}</b></h2>
                         <p><b>Feedback: </b></p>
+                           <div className="alert alert-success card-images"  style={{"display": "none"}} id="helpfeedback">
+                              
+                              <p>Help</p>
+                           </div>
                         <p>Clarity of ad: {this.state.feedback * 100}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
                         <div className="progress">
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.state.feedback * 100} 
