@@ -65,7 +65,7 @@ class AdsController < ApplicationController
           classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5] #Image recon
           if classify.to_f > 0.70
             calling.chomp
-            calling = String(Float(calling) + 1.5)
+            calling = String(Float(calling) * 1.25)
           end
           if Float(calling) > 10.0
             calling = "10.0"
@@ -74,7 +74,7 @@ class AdsController < ApplicationController
           redirect_to :action => :index 
       else
           # @ad.destroy  # destroy if not enough limits
-          flash[:error] = "Out of uploads for this month" 
+          flash[:error] = "Out of uploads for this month"  
           redirect_to :action => :error  
       end
      else

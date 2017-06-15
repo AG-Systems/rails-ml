@@ -2,7 +2,13 @@
 $(document).ready(function () {
     if(window.screen.width >= 765)
     {
-        $(".glyphicon-chevron-left").attr('class', '')
+        $("#sidenavbtn").css("visibility", "hidden");
+    }
+    else
+    {
+        
+        $("#sidenavbtn").css("visibility", "visible");
+        
     }
 });
 
@@ -10,7 +16,7 @@ function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
     $("#main2").css("margin-left", "250px");
-    $("#sidenavbtn").attr('class', '')
+    $("#sidenavbtn").css("visibility", "hidden");
     if(window.screen.width < 766)
     {
         $("p").hide();
@@ -32,6 +38,15 @@ function openNav() {
         $(".btn-file").css("display", "none");
         $(".progress").css("display", "none");
     }
+    if(window.screen.width <= 350)
+    {
+        $(".navbar-brand").hide();
+    }
+    if(window.screen.width <= 400)
+    {
+        $('#left-side').css({opacity: 1.0, visibility: "visible"}).animate({opacity: 0.0});
+        $('#right-side').css({opacity: 1.0, visibility: "visible"}).animate({opacity: 0.0});
+    }
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
@@ -39,7 +54,7 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
     $("#main2").css("margin-left", "0px");
-    $("#sidenavbtn").attr('class', 'glyphicon glyphicon-chevron-left')
+    $("#sidenavbtn").css("visibility", "visible");
     if(window.screen.width < 766)
     {
         $("p").show();
@@ -61,5 +76,14 @@ function closeNav() {
         $(".btn-success").css("display", "inline");
         $(".btn-file").css("display", "inline-block");
         $(".progress").css("display", "block");
+    }
+    if(window.screen.width <= 350)
+    {
+        $(".navbar-brand").show();
+    }
+    if(window.screen.width <= 400)
+    {
+        $('#left-side').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
+        $('#right-side').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
     }
 }

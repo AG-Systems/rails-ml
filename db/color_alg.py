@@ -5,9 +5,13 @@ import tensorflow as tf
 # from tesseract import image_to_string
 import pytesser
 import string
+import os
+from difflib import SequenceMatcher
 
 imgurl = str(sys.argv[1])
 attention_score = 0
+
+color_thief = ColorThief(imgurl)
 
 def brightness( im_file ):
    im = Image.open(im_file).convert('L')
@@ -53,6 +57,20 @@ if color_results > 100:
     attention_score += 1.0
 elif color_results > 50:
     attention_score += 1.5
+dominant_color = color_thief.get_color(quality=1)
+palette = color_thief.get_palette(color_count=10)
 
+txt = pytesser.image_to_string(str(sys.argv[1]))
+txt = txt.lower()
+txt = txt.replace('\n', ' ').replace('\r', '')
+callnum = 0
+calltoaction = ["start", "stop","build","join","learn","discover","you", "me", "my", "want", "need", "free", "save", "try", "you"]
+for x in txt:
+    for y in calltoaction:
+        if y in x:
+            callnum += 1
+callnum = callnum * 1.3
 
-print(attention_score)
+attention_score += callnum
+attention_score = "%.1f" % attention_score
+print(attention_score) #ATTENTION GRAB
