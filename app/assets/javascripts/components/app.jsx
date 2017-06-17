@@ -21,11 +21,17 @@ class Post extends React.Component {
   }
   help()
   {
-    var x = document.getElementById('helpfeedback');
-    if (x.style.display === 'none') {
-        x.style.display = 'block';
-    } else {
-        x.style.display = 'none';
+    var modal = document.getElementById('myModal');
+    modal.style.display = "block";
+    var span = document.getElementsByClassName("closehelp")[0];
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
   }
   render() { 
@@ -36,10 +42,15 @@ class Post extends React.Component {
                     <div className="container-images">
                         <h2><b>Title: {this.props.title}</b></h2>
                         <p><b>Feedback: </b></p>
-                           <div className="alert alert-success card-images"  style={{"display": "none"}} id="helpfeedback">
-                              
-                              <p>Help</p>
-                           </div>
+                          <div id="myModal" className="modal">
+                          
+                            
+                            <div className="modal-content">
+                              <span className="closehelp">&times;</span>
+                              <p>Help goes here</p>
+                            </div>
+                          
+                          </div>
                         <p>Clarity of ad: {this.state.feedback * 100}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
                         <div className="progress">
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.state.feedback * 100} 

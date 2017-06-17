@@ -87,3 +87,4 @@ function closeNav() {
         $('#right-side').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
     }
 }
+

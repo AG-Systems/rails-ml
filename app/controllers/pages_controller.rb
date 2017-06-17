@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   include PagesHelper
   layout 'application'
   
+
+  
   def index
       @ad = Ad.new
       @images = Ad.all.order('created_at DESC').limit(1)
@@ -25,7 +27,8 @@ class PagesController < ApplicationController
   
   def show
     @ad = Ad.find(params[:id])    
-    
+    def support
+    end
   end
   helper_method :all
 end

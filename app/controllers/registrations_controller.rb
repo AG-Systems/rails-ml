@@ -1,10 +1,11 @@
 class RegistrationsController < Devise::RegistrationsController
     prepend_before_action :check_captcha, only: [:create]
-    
+    #include RegistrationsHelper
     def new
         super
         
     end
+  
     protected
     def after_sign_up_path_for(resource) 
         #'/subscribers/new'
