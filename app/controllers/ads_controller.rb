@@ -31,7 +31,7 @@ class AdsController < ApplicationController
     end
     @user = User.find_by_email(@ad[:author])
     upload_limit = @user[:limit]
-    if @user.ready == true && valid_title
+    if valid_title
       if upload_limit.to_i > 0 || @user.subscribed?
         @ad.save #vertiy photo is jpeg,gif, or png
         @user.update_attributes(:ready => false)

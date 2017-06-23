@@ -42,34 +42,15 @@
                     </div>
                       </div>
                   </div>
-                    <h3><%= f.text_field :title, class: "input-max", :required => true, placeholder:"Title of your ad", :autocomplete => :off, :maxlength => 35  %></h3>
-                    <!--
-                    <div id="input-valid"></div>
-										<p><b>Feedback: </b></p>
-										<p style="font-size: 16px">Your feedback and info goes here</p>
-                    <hr/>
-                    -->
-                    <!--
-                    <p><b>Image Recognition:</b></p>
-						<p style="font-size: 16px">See how recognizable your image is</p>
-						<p style="font-size: 16px">Shows the top 5 guesses</p>
-                    <hr/>
-                    -->
-                    <!--
-                    <p>Rating: 10/10</p>
-                    <p style="font-size: 16px">Anything above 5 is good</p>
-                    <p style="font-size: 16px">Anything below 5 is bad</p>   
-                  <br/> -->
+                    <h3><%= f.text_field :title, id: "titleofad", class: "input-max", :required => true, placeholder:"Title of your ad", :autocomplete => :off, :maxlength => 35  %></h3>
+                    <p style="font-size: 13px; display: none" id="alert-title">* Only numbers and alphabet characters are allowed</p>
                   <div style="text-align: center;">
-                      <% if current_user.ready %>
+                     
                           <% if current_user.limit > 0 || current_user.subscribed %>
                               <%= f.submit "Submit ad", :class => 'btn btn-success', :style => "width: 75%", data: { disable_with: "Please wait..." } %>
                           <% else %>
                               <button type="button" class="btn btn-danger disabled">You are out of uploads for this month</button>
                          <% end %>
-                      <% else %>
-                         <button type="button" class="btn btn-danger disabled">Please wait for your previews ad to finish</button>
-                      <% end %>
                   </div>
                   <br/>
                 </div>
@@ -90,6 +71,22 @@
           };         
           
         })
+$("input").on("keydown", function (e) 
+{
+    var input_title = document.getElementById("titleofad").value;
+    var res = input_title.match(/^[a-zA-Z0-9\.]*$/);
+    // console.log(res);
+    if (e.which === 32 || !res)
+    {
+        $("#alert-title").show();
+    }
+    else
+    {
+        $("#alert-title").hide();
+    }
+    return e.which !== 32;
+});
+
 </script>
 
 <script type="text/javascript">
