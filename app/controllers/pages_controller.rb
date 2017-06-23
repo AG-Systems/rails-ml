@@ -27,8 +27,8 @@ class PagesController < ApplicationController
   
   def show
     @ad = Ad.find(params[:id])    
-    def support
-    end
+  def support
+  end
   end
   helper_method :all
 end

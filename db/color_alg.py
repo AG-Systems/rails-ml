@@ -69,7 +69,7 @@ for x in txt:
     for y in calltoaction:
         if y in x:
             callnum += 1
-callnum = callnum * 1.3
+callnum = callnum * 1.5
 
 attention_score += callnum
 attention_score = "%.1f" % attention_score

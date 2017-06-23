@@ -105,6 +105,7 @@ for img in os.listdir(NEG_FOLDER):
             counter += 0.010
 #counter += (total_score * .10)
 # print(unique_pixels)
+counter = counter * 1.2
 if counter > 10.0:
     counter = 10.0
 elif counter < 0.0:

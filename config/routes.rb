@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'upload' => 'pages#new'
   get 'terms' => 'pages#terms'
   get 'error' => 'ads#error'
-  get 'results' => 'pages#results'
+  get 'results' => 'pages#results' 
   resources :accounts
   resources :subscribers
   resources :ads

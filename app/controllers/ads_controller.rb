@@ -1,6 +1,6 @@
 class AdsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  include PagesHelper
+  include PagesHelper 
   require 'open-uri'
   include CarrierWave::MiniMagick
   layout 'application'
@@ -83,7 +83,7 @@ class AdsController < ApplicationController
       #redirect_to ads_path(@ad)
   end  # end of function
   
-  def show
+  def show 
     @ad = Ad.find(params[:id])        
   end
   helper_method :all
