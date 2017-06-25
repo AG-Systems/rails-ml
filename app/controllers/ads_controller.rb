@@ -63,13 +63,38 @@ class AdsController < ApplicationController
           puts "Attention Grab:" + color_status
           ad_type = classify[0..Integer(classify.index('('))-1] #Maybe in the future, we can use this
           classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5] #Image recon
+          
+          calling.chomp!
+          color_status.chomp!
+          calling = Float(calling)
+          color_status = Float(color_status)
           if classify.to_f > 0.70
-            calling.chomp
-            calling = String(Float(calling) * 1.25)
+            calling = (calling * (1.2 + (classify.to_f - 0.70)))
+
+            color_status = (color_status * (1.2 + (classify.to_f - 0.70)))
+            puts "Confident object dect"
+          elsif classify.to_f < 0.10
+              calling = (calling * 1.2)
+
+              color_status = (color_status * 1.2)
+              puts "Ad is too unique" 
+          else
+              calling = (calling + (Float(run_score) * 0.5))
+              
+              color_status = (color_status + (Float(run_score) * 0.5))
           end
+          calling = String(calling)
+          color_status = String(color_status)
           if Float(calling) > 10.0
             calling = "10.0"
           end
+          calling = (calling.to_f)
+          color_status = (color_status.to_f)
+          classify = (classify.to_f)
+          
+          calling = String(calling)
+          color_status = String(color_status)
+          classify = String(classify)
           @ad.update_attributes(:feedback => calling, :rating => run_score, :recon => classify.chomp, :adtype => ad_type, :adstatus => run_result.chomp, :adcolor => color_status.chomp)
           redirect_to :action => :index 
       else

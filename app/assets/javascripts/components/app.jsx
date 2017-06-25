@@ -51,20 +51,20 @@ class Post extends React.Component {
                             </div>
                           
                           </div>
-                        <p>Clarity of ad: {this.state.feedback * 100}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
+                        <p>Clarity of ad: {Math.round(this.state.feedback * 100)}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
                         <div className="progress">
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.state.feedback * 100} 
                           aria-valuemin="0" aria-valuemax="100" style={{width:this.state.feedback * 100 + "%"}}>
                           </div>
                         </div>
-                        <p>Ad Memorability: {this.state.calltoaction* 10}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
+                        <p>Ad Memorability: {Math.round(this.state.calltoaction* 10)}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
                         <div className="progress">
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.state.calltoaction * 10} 
                           aria-valuemin="0" aria-valuemax="100" style={{width:this.props.calltoaction * 10 + "%"}}>
                           </div>
                         </div>     
 
-                        <p>Attention Grab: {this.props.colorstatus * 10}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
+                        <p>Attention Grab: {Math.round(this.props.colorstatus * 10)}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
                         <div className="progress">
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.props.colorstatus * 10} 
                           aria-valuemin="0" aria-valuemax="100" style={{width:this.props.colorstatus * 10 + "%"}}>

@@ -1,12 +1,18 @@
 import sys
 from PIL import Image, ImageStat
 from colorthief import ColorThief
+import cv2
 import tensorflow as tf
 # from tesseract import image_to_string
+import random
+import numpy
 import pytesser
 import string
 import os
 from difflib import SequenceMatcher
+import sys
+import os.path
+
 
 imgurl = str(sys.argv[1])
 attention_score = 0
@@ -73,4 +79,6 @@ callnum = callnum * 1.5
 
 attention_score += callnum
 attention_score = "%.1f" % attention_score
+
+
 print(attention_score) #ATTENTION GRAB
