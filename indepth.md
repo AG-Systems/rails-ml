@@ -1,4 +1,4 @@
-## ) 0 Install ruby, python, rails
+## 0) Install ruby, python, rails
 
     Ruby version: 2.3.4
     
