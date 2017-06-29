@@ -1337,11 +1337,16 @@ h2
     margin: 5% auto; /* 15% from the top and centered */
     padding: 20px;
     width: 50%;
+    color: #c1c1c1;
+    font-size: 15px;
     /* border: 1px solid #888; 
     width: 80%; 
     */
 }
-
+.modal-content b 
+{
+	font-size: 25px;
+}
 /* The Close Button */
 .closehelp {
     color: #aaa;

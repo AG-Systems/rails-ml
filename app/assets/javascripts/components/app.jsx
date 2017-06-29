@@ -47,7 +47,20 @@ class Post extends React.Component {
                             
                             <div className="modal-content">
                               <span className="closehelp">&times;</span>
-                              <p>Help goes here</p>
+                              <h1>Help</h1>
+                              <b>Clarity of ad: </b>
+                              <p>This is how easy and/or easily recognizable your ad is</p>
+                              <p>If the score is low, that means the computer was not able to figure out 
+                              what your ad was </p>
+                              <b>Memorability: </b>
+                              <p> This is how unique your ad is. Generelly for best results in the real world
+                              we reccomend your ad to be played really often or have it be so unique that 
+                              everybody remembers the ad </p>
+                              <b>Attention Grab: </b>
+                              <p> How much attention your ad grabs. This score might be irelavant depending on 
+                              what platform you run on. For example, running a dark ad on facebook is a good idea.
+                              The score might say otherwise.
+                              </p>
                             </div>
                           
                           </div>

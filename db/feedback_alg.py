@@ -79,6 +79,7 @@ elif max_score - min_score > 50:
 else:
     counter += .25
 #counter *= 1.5
+"""
 image_test = dhash(Image.open(imgurl))
 
 POS_FOLDER = os.path.abspath('db/algorithm/train_imgs/positive')
@@ -103,6 +104,7 @@ for img in os.listdir(NEG_FOLDER):
         temp_score = similar(img,x)
         if temp_score < 0.1:
             counter += 0.010
+"""
 #counter += (total_score * .10)
 # print(unique_pixels)
 counter = counter * 1.2

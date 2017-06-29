@@ -10,6 +10,10 @@ $(document).ready(function () {
         $("#sidenavbtn").css("visibility", "visible");
         
     }
+    if(window.screen.height <= 800)
+    {
+        $("#myModal").css("overflow-y", "scroll");
+    }
 });
 
 function openNav() {

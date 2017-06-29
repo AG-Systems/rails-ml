@@ -57,11 +57,13 @@ class AdsController < ApplicationController
           @user.update_attributes(:limit => number_uploads, :ready => true) #Reduce the number of uploads by 1 and make it so they can upload again 
           run_result = ad_rating[Integer(ad_rating.index('RATING_CLASS')) + 12..Integer(ad_rating.index('RATING_SCORE'))-1] #Run this ad or not
           run_score = ad_rating[Integer(ad_rating.index('RATING_SCORE')) + 13..-1] # Score
+          ad_type = classify[0..Integer(classify.index('('))-1] #Maybe in the future, we can use this
           puts "Results: " + run_result
+          puts "Ad score: " + run_score
           puts "Classify: " + classify
           puts "Ad memorability: " + calling
           puts "Attention Grab:" + color_status
-          ad_type = classify[0..Integer(classify.index('('))-1] #Maybe in the future, we can use this
+          puts "Ad Type: " + ad_type
           classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5] #Image recon
           
           calling.chomp!
@@ -95,6 +97,29 @@ class AdsController < ApplicationController
           calling = String(calling)
           color_status = String(color_status)
           classify = String(classify)
+          """
+          puts 'NEW SCORE: '
+          puts run_score
+          puts '-----------'
+          new_rating = `python db/special_alg.py #{image_path} #{@ad[:id]} #{ad_type}`
+          new_rating = new_rating[Integer(new_rating.index('RATING_SCORE')) + 13..-1]
+          run_score = (run_score.to_f + Float(new_rating.to_f)) / 2
+          run_score = run_score.to_s
+          puts new_rating
+          puts '----------------------'
+          """
+          if Float(run_score) <= 1.0 or Float(run_score) >= 9.0
+            puts
+            puts "Score was low / high: Re-run time"
+            temp = ad_type
+            temp = temp.gsub(/\s+/, "")
+            new_rating = `python db/special_alg.py #{image_path} #{@ad[:id]} #{temp}`
+            new_rating = new_rating[Integer(new_rating.index('RATING_SCORE')) + 13..-1]
+            #run_score = (run_score.to_f + Float(new_rating.to_f)) / 2 #Take average or just keep new score
+            run_score = run_score.to_s
+            puts "New score: "
+            puts run_score
+          end
           @ad.update_attributes(:feedback => calling, :rating => run_score, :recon => classify.chomp, :adtype => ad_type, :adstatus => run_result.chomp, :adcolor => color_status.chomp)
           redirect_to :action => :index 
       else
