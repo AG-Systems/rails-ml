@@ -110,7 +110,7 @@ class AdsController < ApplicationController
           """
           if Float(run_score) <= 1.0 or Float(run_score) >= 9.0
             puts
-            puts "Score was low / high: Re-run time"
+            puts "Score was low / high: Re-run time" 
             temp = ad_type
             temp = temp.gsub(/\s+/, "")
             new_rating = `python db/special_alg.py #{image_path} #{@ad[:id]} #{temp}`

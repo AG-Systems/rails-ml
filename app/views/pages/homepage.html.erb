@@ -1,63 +1,120 @@
 <body id="login">
-   <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
    </head>
-<div style="height: 120%; width: 100%;">   
-      <br/>
-      <br/>
-      <div class="container" style=" text-align: center">
-          <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-12" style="color: black;">
-                  <h1 class="font-semibold" style="font-size: 50px;">PIXEL<span class="font-thin"> ML</span></h1>
-                     <h4 class="font-thin" style="font-size: 30px;">Make your ad<span class="font-semibold"> perfect </span>  </h4>
-                  <br>
-                   <h5 class="font-thin" style="font-size: 25px;">Instant feedback for your ads</h5>
-                  <br>
-               <a href="/users/sign_up">
-                  <button type="button" class="btn btn-primary"style="font-size:22px; background-color: #21ce99; border-color: #1ebc8c" >
-                     Start Today For Free
-                  </button></a>
-                  
-                  <br/>
-                  <br/>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 
-                    aria-haspopup="true" aria-expanded="false"
-                    style="font-size:22px; background-color: #21ce99; border-color: #1ebc8c"
-                    >
-                      Features <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Free forever</a></li>
-                      <li><a href="#">Instant feedback</a></li>
-                      <li><a href="#">24/7 Support</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#"></a></li>
-                    </ul>
-                  </div>
-                 </div>
-                 <div class="col-md-6 col-sm-6 col-xs-12" style="color: white;">
-                    <br/>
-                  <div class="card-images" style="background: linear-gradient(180deg, #000000, #3e3e3e); min-width: 265px; border-color: #e4e6e5;">
-                     <img src="https://s3-us-west-1.amazonaws.com/techauriga/static_img/loading1.gif"/>
+
+<div>
+    <section class="module parallax parallax-1">
+  <div class="container">
+    <h1 style="color: rgba(255, 255, 255, 0.8);">PIXEL<span style="color: rgb(255, 255, 255);">ML</span></h1>
+    
+  </div>
+</section>
+
+<section class="module content">
+  <div class="container" style="text-align: center; color: white">
+    <h2>Make your ad perfect</h2>
+    <p>Pixelml analyzes your ad and offers instant suggestions</p>
+    <div class="card-images" style="background-color: #303030; min-width: 265px; border-color: #e4e6e5;">
+                     <img src="https://s3-us-west-1.amazonaws.com/techauriga/static_img/loading1.gif">
                      <div class="container-images" style="background-color: transparent; height: 100%;">
-                        <h3><b>Insert your ad here</b></h3>
-                        <p>Pixelml analyzes your ad and offers <b>instant </b>suggestions</p>
-                        
-                        <p>Rating of ad: <b>10/10</b></p>
-                     </div>
+                        <h3><b>Example ad</b></h3>
+                        <p>Clarity of ad: 80%</p>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="80" 
+                          aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                          </div>
+                        </div>
+                        <p>Ad Memorability: 100%</p>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="100" 
+                          aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                          </div>
+                        </div> 
+                        <p>Attention Grab: 30%</p>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="30" 
+                          aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+                          </div>
+                        </div>                         
+                        <p>Rating of ad: <b>7/10</b></p>
                      </div>
               </div>
-          </div>
-      </div>
+  <br/>
+      <div class="card-images" style="background-color: #303030; min-width: 265px; border-color: #e4e6e5;">
+          <div id="list">
+              <br>
+              <h2> Start Today With A Free Trial</h2>
+              <div class="cd-price">
+            	<span class="cd-currency">$</span>
+            	<span class="cd-value">0</span>
+            	<span class="cd-duration">/mo</span>
+            	</div>
+            <ul class="list-group">
+              <li class="list-group-item">Free forever</li>
+              <li class="list-group-item">Instant feedback</li>
+              <li class="list-group-item">Free support</li>
+            </ul>
+            <div class="frontpage">
+            <a href="/users/sign_up">
+            <button type="button" class="btn btn-primary btn-lg">Sign up!</button>
+            </a>
+            </div>
 </div>
-</body>
+              </div>
+  </div>
+</section>
 
+</div>
 
 <style>
 body
 {
-    background: #C9D6FF;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background-color: rgb(66, 66, 66);
+
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  color: white;
+}
+section.module.content {
+  color: white;
+  padding-top: 25px;
+}
+section.module.parallax {
+  height: 600px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+section.module.parallax h1{
+  font-size: 48px;
+  line-height: 600px;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+section.module.parallax-1 {
+  background-image: url("../bg6.jpg");
+  
+}
+
+@media all and (min-width: 600px) {
+  section.module h2 {
+    font-size: 42px;
+  }
+  section.module p {
+    font-size: 20px;
+  }
+  section.module.parallax h1 {
+    font-size: 96px;
+  }
+}
+@media all and (min-width: 960px) {
+  section.module.parallax h1 {
+    font-size: 160px;
+  }
 }
 </style>

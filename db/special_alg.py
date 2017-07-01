@@ -52,7 +52,7 @@ else:
     POS_FOLDER = os.path.abspath('db/algorithm/train_imgs/positive')
     NEG_FOLDER = os.path.abspath('db/algorithm/train_imgs/negative')
     cater = "unknown"
-    dataset = 0
+    dataset = 110
 #TEST_DIR = os.path.abspath('test_imgs')
 TEST_DIR = os.path.abspath("public/uploads/" + str(img_id))
 IMG_SIZE = 100
