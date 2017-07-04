@@ -5,6 +5,10 @@
     Rails version: 5.0.0
     
     Python: 2.7.6, preferred python 3.X
+    
+    sudo easy_install pip (if pip is not installed)
+    
+    sudo apt-get install libpq-dev (for PG db)
 
 ## 1) Clone the project
 
