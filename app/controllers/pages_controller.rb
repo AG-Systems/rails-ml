@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   end
 
   def new
-      @ad = Ad.new
+      @ad = Ad.new 
   end
   
   def results
