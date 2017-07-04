@@ -144,7 +144,7 @@ if model_exists:
 
 # TESTING
 test_data = process_test_data()
-test_data = np.load(cater + '_test_data.npy')
+test_data = np.load(cater + '_test_data.npy') 
 image_file_name = os.path.basename(os.path.splitext(img_name)[0])
 str_label = ""
 print("RATING_CLASS")
