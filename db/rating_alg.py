@@ -125,8 +125,8 @@ if os.path.exists('{}.meta'.format(MODEL_NAME)):
     #print('model loaded!')
     pass
 
-train = train_data[:-110]
-test = train_data[-110:]
+train = train_data[:-125] #110
+test = train_data[-125:] #110
 
 X = np.array([i[0] for i in train]).reshape(-1,IMG_SIZE,IMG_SIZE,1)
 Y = [i[1] for i in train]
