@@ -9,7 +9,7 @@ class PagesController < ApplicationController
       @images = Ad.all.order('created_at DESC').limit(1)
 
   end
-
+ 
   def new
       @ad = Ad.new 
   end

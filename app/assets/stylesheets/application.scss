@@ -311,9 +311,9 @@
 #list
 {
   max-width: 100%;
-  max-height: 400px;
+  max-height: 600px;
   min-width: 20px;
-  min-height: 400px;
+  min-height: 510px;
   margin: 0 auto;
   text-align: center;
 background: #1D976C;  /* fallback for old browsers */
@@ -358,7 +358,12 @@ background: linear-gradient(to left, #ff4b1f , #ff9068);
  {
    font-size: 20px;
    color: white;
+
  }
+.list-group-item.active
+{
+	  background-color: #21ce99; 
+}
  .cd-value
  {
    color: white;
@@ -390,9 +395,10 @@ h2
 }
 .frontpage .btn-primary
 {
-  background-color: #0c1f28;
-  border-color: #0c1f28;
+  background-color: #333333;
+  border-color: #333333;
 }
+/*
 .frontpage .btn-primary:hover
 {
      background: #215c77;
@@ -400,6 +406,7 @@ h2
 -moz-box-shadow: 0px 0px 91px 17px rgba(255,255,255,0.61);
 box-shadow: 0px 0px 91px 17px rgba(255,255,255,0.61);
 }
+*/
 
 #signupbody
 {
@@ -720,7 +727,7 @@ background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-2
 }
 
 #slide-1 {
-	 background-image: url('../bg2.jpg');
+	 background-image: url('../bg6.jpg');
 
 	color: #ffffff;
 	/* height: 100%; For some reason this doesnt work */
@@ -754,11 +761,11 @@ background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-2
 	}
 	
 	#home-row-1 h1 {
-		font-size: 54px;
+		font-size: 70px;
 	}
 	
 	#home-row-1 h4 {
-		font-size: 32px;
+		font-size: 54px;
 	}
 	
 	#home-row-2 {
@@ -904,7 +911,7 @@ background: linear-gradient(to left, #000000 , #434343); /* W3C, IE 10+/ Edge, F
 background: #E6DADA; 
 background: -webkit-linear-gradient(to left, #E6DADA , #274046); 
 background: linear-gradient(to left, #E6DADA , #274046); 
-        
+// background-color: rgb(66,66,66);      
         
 	color: #e4e6e5;
 	padding-top: 90px;
