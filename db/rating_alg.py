@@ -158,9 +158,9 @@ for num,data in enumerate(test_data):
     
     if str(image_file_name) == str(img_num):
         if np.argmax(model_out) == 1: 
-            str_label='Do not run' #pos
+            str_label='Low probability of success' #pos
         else: 
-            str_label='Run' #neg
+            str_label='High probability of success' #neg
         print(str_label)
 
 with open('submission_file.csv','w') as f:
@@ -186,7 +186,7 @@ with open('submission_file.csv') as csvfile:
             #answer = float("{0:.2f}".format((float(row[1]) * 1.5)* 10))
             answer = float(row[1])
             answer *= 10
-            if str_label == "Do not run":
+            if str_label == "Low probability of success":
                 # answer = 10 - answer
                 answer = -answer * .75
                 pass

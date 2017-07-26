@@ -96,7 +96,7 @@ class AdsController < ApplicationController
           
           calling = String(calling)
           color_status = String(color_status)
-          classify = String(classify)
+          classify = String(classify) 
           """
           puts 'NEW SCORE: '
           puts run_score
@@ -118,7 +118,7 @@ class AdsController < ApplicationController
             #run_score = (run_score.to_f + Float(new_rating.to_f)) / 2 #Take average or just keep new score
             run_score = run_score.to_s
             puts "New score: "
-            puts run_score
+            puts run_score 
           end
           @ad.update_attributes(:feedback => calling, :rating => run_score, :recon => classify.chomp, :adtype => ad_type, :adstatus => run_result.chomp, :adcolor => color_status.chomp)
           redirect_to :action => :index 

@@ -11,6 +11,36 @@
 					<br>
 					<br>
 					<a href="/users/sign_up"><button type="button" class="btn btn-primary" style="font-size:25px; background-color: #21ce99; border-color: #1ebc8c;">Join free for a month </button></a>
+					
+					<br/>
+					<br/>
+					<br/>
+					<button type="button" class="btn btn-primary" style="font-size:25px; background-color: #21ce99; border-color: #1ebc8c;" onclick="popup_vid()">Watch video Now</button>
+					   <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <span class="closehelp">&times;</span>
+                  <div class="embed-responsive embed-responsive-4by3">
+                  <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/PUhoCAz_0-Q?rel=0&amp;controls=0&amp;showinfo=0"  allowfullscreen></iframe>
+                  </div>
+                </div>
+             </div>
+             <script>
+              function popup_vid()
+              {
+             	    var modal = document.getElementById('myModal');
+							    modal.style.display = "block";
+							    var span = document.getElementsByClassName("closehelp")[0];
+							    span.onclick = function() {
+							        modal.style.display = "none";
+							    }
+							    
+							    window.onclick = function(event) {
+							        if (event.target == modal) {
+							            modal.style.display = "none";
+							        }
+							    }
+              }
+             </script>
 				</div><!-- /col-12 -->
 			</div><!-- /row -->
 			<!-- 
@@ -50,7 +80,7 @@
   </a>
 </div>
 			</div><!-- /row -->
-      
+
 		</div><!-- /container -->
 	</div><!-- /slide3 -->
 
@@ -127,7 +157,7 @@
 <ul class="list-group">
   <li class="list-group-item">Instant results</li>
   <li class="list-group-item">Unlimited uploads</li>
-  <li class="list-group-item">Reliable</li>
+  <li class="list-group-item">Free Trial Available</li>
   <li class="list-group-item">Cancel anytime</li>
   <li class="list-group-item">Great support</li>
 </ul>

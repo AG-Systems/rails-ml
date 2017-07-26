@@ -41,6 +41,7 @@ class Post extends React.Component {
                     <img src={this.props.image} alt={this.props.title} id="pic-image"/>
                     <div className="container-images">
                         <h2><b>Title: {this.props.title}</b></h2>
+                        {/*
                         <p><b>Feedback: </b></p>
                           <div id="myModal" className="modal">
                           
@@ -64,6 +65,7 @@ class Post extends React.Component {
                             </div>
                           
                           </div>
+                        
                         <p>Clarity of ad: {Math.round(this.state.feedback * 100)}% <span className="glyphicon glyphicon-question-sign" onClick={this.help}></span></p>
                         <div className="progress">
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.state.feedback * 100} 
@@ -82,8 +84,11 @@ class Post extends React.Component {
                           <div className="progress-bar progress-bar-custom" role="progressbar" aria-valuenow={this.props.colorstatus * 10} 
                           aria-valuemin="0" aria-valuemax="100" style={{width:this.props.colorstatus * 10 + "%"}}>
                           </div>
-                        </div>                         
+                        </div>
+                        
                         <p><b>{this.props.status} this ad </b></p>
+                        */}
+                        <p><b>Status: <p>{this.props.status} </p></b></p>
                         <div id="break"></div>
                         <p><b>Overall Rating: {this.props.rating}/10</b></p>
                     </div>
