@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'terms' => 'pages#terms'
   get 'error' => 'ads#error'
   get 'results' => 'pages#results' 
+  get 'privacy' => 'pages#privacy'
   resources :accounts
   resources :subscribers
   resources :ads

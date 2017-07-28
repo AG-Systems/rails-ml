@@ -5,12 +5,12 @@ class AdsController < ApplicationController
   include CarrierWave::MiniMagick
   layout 'application'
   
-  def index
+  def index 
       @ad = Ad.new   
       
   end
 
-  def new 
+  def new  
       @ad = Ad.new
       
   end

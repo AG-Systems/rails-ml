@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
         format.all  { render nothing: true, status: 404 } # Need to delete this soon
       end 
     end  
-  
+   
   def configure_permitted_parameters
     update_attrs = [:password, :password_confirmation, :current_password]
     devise_parameter_sanitizer.permit :account_update, keys: update_attrs
