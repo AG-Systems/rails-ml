@@ -36,8 +36,8 @@
                <div class="col-md-6 col-sm-6 col-xs-12" id="left-side">
                   <% @images.where(author:  current_user.email).each do |ad| %>				                		
                   <%= react_component("Post", {
-                  title: ad.title, image: ad.image.url, feed: ad.recon, rating: ad.rating, status: ad.adstatus, 
-                  calltoaction: ad.feedback, colorstatus: ad.adcolor}, {prerender: true}) %>
+                  title: ad.title, image: ad.image.url,rating: ad.rating, status: ad.adstatus, feedback: ad.feedback 
+                   }, {prerender: true}) %>
                   <% end %>
                   <% if @images.where(author:  current_user.email).length == 0 %>
                   <div>

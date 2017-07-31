@@ -34,6 +34,7 @@ class Post extends React.Component {
         }
     }
   }
+
   render() { 
     return(
            <div>
@@ -41,6 +42,8 @@ class Post extends React.Component {
                     <img src={this.props.image} alt={this.props.title} id="pic-image"/>
                     <div className="container-images">
                         <h2><b>Title: {this.props.title}</b></h2>
+                        <p><b>Feedback: </b><p> {this.props.feedback}</p></p>
+                        
                         {/*
                         <p><b>Feedback: </b></p>
                           <div id="myModal" className="modal">
@@ -88,7 +91,7 @@ class Post extends React.Component {
                         
                         <p><b>{this.props.status} this ad </b></p>
                         */}
-                        <p><b>Status: <p>{this.props.status} </p></b></p>
+                        <p><b>Status: </b><p>{this.props.status} </p></p>
                         <div id="break"></div>
                         <p><b>Overall Rating: {this.props.rating}/10</b></p>
                     </div>

@@ -45,8 +45,10 @@ class AdsController < ApplicationController
         image.format "jpg"
         classify = `python db/classify_image.py --image_file #{image_path}`
         ad_rating = `python db/rating_alg.py #{image_path} #{@ad[:id]}`
-        calling = `python db/feedback_alg.py #{image_path}`
-        color_status = `python db/color_alg.py #{image_path}`
+        #calling = `python db/feedback_alg.py #{image_path}`
+        #color_status = `python db/color_alg.py #{image_path}`
+        text_recon = `python db/classify_text.py #{image_path}`
+        feedback_results = ""
           number_uploads = @user[:limit]
           if !current_user.subscribed
             number_uploads = @user[:limit]
@@ -61,25 +63,33 @@ class AdsController < ApplicationController
           puts "Results: " + run_result
           puts "Ad score: " + run_score
           puts "Classify: " + classify
-          puts "Ad memorability: " + calling
-          puts "Attention Grab:" + color_status
+          puts "Text: " + text_recon
+          #puts "Ad memorability: " + calling
+          #puts "Attention Grab:" + color_status
+          if text_recon.length > 10
+            feedback_results = "Try using less text"
+          end
+          if text_recon.length > 25
+            feedback_results = "You are using way too much text"
+          end
           puts "Ad Type: " + ad_type
           classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5] #Image recon
           
-          calling.chomp!
-          color_status.chomp!
-          calling = Float(calling)
-          color_status = Float(color_status)
+          #calling.chomp!
+          #color_status.chomp!
+          #calling = Float(calling)
+          #color_status = Float(color_status)
+          """
           if classify.to_f > 0.70
             calling = (calling * (1.2 + (classify.to_f - 0.70)))
 
             color_status = (color_status * (1.2 + (classify.to_f - 0.70)))
-            puts "Confident object dect"
+            puts 'Confident object dect'
           elsif classify.to_f < 0.10
               calling = (calling * 1.2)
 
               color_status = (color_status * 1.2)
-              puts "Ad is too unique" 
+              puts 'Ad is too unique' 
           else
               calling = (calling + (Float(run_score) * 0.5))
               
@@ -88,15 +98,17 @@ class AdsController < ApplicationController
           calling = String(calling)
           color_status = String(color_status)
           if Float(calling) > 10.0
-            calling = "10.0"
+            calling = '10.0'
           end
-          calling = (calling.to_f)
-          color_status = (color_status.to_f)
-          classify = (classify.to_f)
+
+          #calling = (calling.to_f)
+          #color_status = (color_status.to_f)
+          """
+          #classify = (classify.to_f)
           
-          calling = String(calling)
-          color_status = String(color_status)
-          classify = String(classify) 
+          #calling = String(calling)
+          #color_status = String(color_status)
+          #classify = String(classify) 
           """
           puts 'NEW SCORE: '
           puts run_score
@@ -120,7 +132,8 @@ class AdsController < ApplicationController
             puts "New score: "
             puts run_score 
           end
-          @ad.update_attributes(:feedback => calling, :rating => run_score, :recon => classify.chomp, :adtype => ad_type, :adstatus => run_result.chomp, :adcolor => color_status.chomp)
+          #@ad.update_attributes(:feedback => calling, :rating => run_score, :recon => classify.chomp, :adtype => ad_type, :adstatus => run_result.chomp, :adcolor => color_status.chomp)
+          @ad.update_attributes(:rating => run_score, :adtype => ad_type, :adstatus => run_result.chomp, :feedback => feedback_results)
           redirect_to :action => :index 
       else
           # @ad.destroy  # destroy if not enough limits
