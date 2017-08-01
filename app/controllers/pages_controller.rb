@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   
   def index
       @ad = Ad.new
-      @images = Ad.all.order('created_at DESC').limit(1)
+      @images = Ad.all.order('created_at DESC').limit(1) 
 
   end 
  

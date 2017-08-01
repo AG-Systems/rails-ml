@@ -39,14 +39,18 @@ if "car" in str(img_c):
     cater = "auto"
     dataset = 7
 elif "site" in str(img_c):
-    POS_FOLDER = os.path.abspath('db/algorithm/c_imgs/site_good_ad')
-    NEG_FOLDER = os.path.abspath('db/algorithm/c_imgs/site_bad_ad')
-    dataset = 0
+    #POS_FOLDER = os.path.abspath('db/algorithm/c_imgs/site_good_ad')
+    #NEG_FOLDER = os.path.abspath('db/algorithm/c_imgs/site_bad_ad')
+    POS_FOLDER = os.path.abspath('db/algorithm/train_imgs/positive')
+    NEG_FOLDER = os.path.abspath('db/algorithm/train_imgs/negative')
+    dataset = 110
     cater = "site"
 elif "cheeseburger" in str(img_c):
-    POS_FOLDER = os.path.abspath('db/algorithm/c_imgs/food_good_ad')
-    NEG_FOLDER = os.path.abspath('db/algorithm/c_imgs/food_bad_ad')
-    dataset = 0
+    #POS_FOLDER = os.path.abspath('db/algorithm/c_imgs/food_good_ad')
+    #NEG_FOLDER = os.path.abspath('db/algorithm/c_imgs/food_bad_ad')
+    POS_FOLDER = os.path.abspath('db/algorithm/train_imgs/positive')
+    NEG_FOLDER = os.path.abspath('db/algorithm/train_imgs/negative')
+    dataset = 110
     cater = "food"
 else:
     POS_FOLDER = os.path.abspath('db/algorithm/train_imgs/positive')

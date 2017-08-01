@@ -48,6 +48,7 @@ class AdsController < ApplicationController
         #calling = `python db/feedback_alg.py #{image_path}`
         #color_status = `python db/color_alg.py #{image_path}`
         text_recon = `python db/classify_text.py #{image_path}`
+        brightness_res = `python db/classify_brightness.py #{image_path}`
         feedback_results = ""
           number_uploads = @user[:limit]
           if !current_user.subscribed
@@ -66,11 +67,17 @@ class AdsController < ApplicationController
           puts "Text: " + text_recon
           #puts "Ad memorability: " + calling
           #puts "Attention Grab:" + color_status
-          if text_recon.length > 10
-            feedback_results = "Try using less text"
-          end
+          puts "Brightness test: " + `python db/classify_brightness.py #{image_path}`
           if text_recon.length > 25
             feedback_results = "You are using way too much text"
+          elsif text_recon.length > 10
+            feedback_results = "Try using less text"
+          else
+            if brightness_res.to_i > 180
+              feedback_results = "Try decresing brightness and/or contrast"
+            elsif brightness_res.to_i < 30
+              feedback_results = "Try increasing brightness and/or contrast"
+            end
           end
           puts "Ad Type: " + ad_type
           classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5] #Image recon
@@ -120,7 +127,7 @@ class AdsController < ApplicationController
           puts new_rating
           puts '----------------------'
           """
-          if Float(run_score) <= 1.0 or Float(run_score) >= 9.0
+          if Float(run_score) <= 1.0 or Float(run_score) >= 9.0 
             puts
             puts "Score was low / high: Re-run time" 
             temp = ad_type

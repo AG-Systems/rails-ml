@@ -8,7 +8,7 @@ class SubscribersController < ApplicationController
     def show 
         token = params[:stripeToken]
         
-        customer = Stripe::Customer.create(
+        customer = Stripe::Customer.create( 
             card: token,
             plan: 1800,
             #email: current_user.email
