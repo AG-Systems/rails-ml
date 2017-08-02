@@ -89,7 +89,7 @@ class AdsController < ApplicationController
           if extract_text.to_f >= 30 and text_recon.length > 10 and temp.length >= 10 and text_size.to_f <= 1000
             feedback_results = "Text takes up too much on your ad \n"
           end
-          if text_size.to_f >= 20000
+          if text_size.to_f >= 20000 and extract_text.to_f <= 10
             feedback_results = "Your text might be too small "
           end
           puts "Ad Type: " + ad_type
