@@ -42,8 +42,8 @@ class Post extends React.Component {
                     <img src={this.props.image} alt={this.props.title} id="pic-image"/>
                     <div className="container-images">
                         <h2><b>Title: {this.props.title}</b></h2>
-                        <p><b>Feedback: </b><p> {this.props.feedback}</p></p>
-                        
+                        <p><b>Feedback: </b></p>
+                        <p> {this.props.feedback}</p>
                         {/*
                         <p><b>Feedback: </b></p>
                           <div id="myModal" className="modal">

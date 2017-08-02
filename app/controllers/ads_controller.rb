@@ -49,6 +49,9 @@ class AdsController < ApplicationController
         #color_status = `python db/color_alg.py #{image_path}`
         text_recon = `python db/classify_text.py #{image_path}`
         brightness_res = `python db/classify_brightness.py #{image_path}`
+        extract_text = `python db/extract_text.py #{image_path}`
+        text_size = `python db/text_graph.py #{image_path}`
+        
         feedback_results = ""
           number_uploads = @user[:limit]
           if !current_user.subscribed
@@ -65,19 +68,29 @@ class AdsController < ApplicationController
           puts "Ad score: " + run_score
           puts "Classify: " + classify
           puts "Text: " + text_recon
+          puts "Percent of text: " + extract_text
+          puts "Total distance between text: " + text_size
           #puts "Ad memorability: " + calling
           #puts "Attention Grab:" + color_status
           puts "Brightness test: " + `python db/classify_brightness.py #{image_path}`
-          if text_recon.length > 25
-            feedback_results = "You are using way too much text"
-          elsif text_recon.length > 10
-            feedback_results = "Try using less text"
+          temp = text_recon
+          temp = temp.gsub(/\s+/, "")
+          if temp.length > 35
+            feedback_results = "You are using way too much text "
+          elsif temp.length > 10
+            feedback_results = "Try using less text "
           else
             if brightness_res.to_i > 180
-              feedback_results = "Try decresing brightness and/or contrast"
+              feedback_results = "Try decresing brightness and/or contrast "
             elsif brightness_res.to_i < 30
-              feedback_results = "Try increasing brightness and/or contrast"
+              feedback_results = "Try increasing brightness and/or contrast "
             end
+          end
+          if extract_text.to_f >= 30 and text_recon.length > 10 and temp.length >= 10 and text_size.to_f <= 1000
+            feedback_results = "Text takes up too much on your ad \n"
+          end
+          if text_size.to_f >= 20000
+            feedback_results = "Your text might be too small "
           end
           puts "Ad Type: " + ad_type
           classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5] #Image recon
