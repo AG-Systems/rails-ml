@@ -43,7 +43,7 @@
                       </div>
                   </div>
                     <h3><%= f.text_field :title, id: "titleofad", class: "input-max", :required => true, placeholder:"Title of your ad", :autocomplete => :off, :maxlength => 35  %></h3>
-                    <p style="font-size: 13px; display: none" id="alert-title">* Only numbers and alphabet characters are allowed</p>
+                    <p style="font-size: 13px; display: none" id="alert-title">* Only numbers, spaces, and alphabet characters are allowed</p>
                   <div style="text-align: center;">
                      
                           <% if current_user.limit > 0 || current_user.subscribed %>
@@ -74,8 +74,9 @@
 $("input").on("keydown", function (e) 
 {
     var input_title = document.getElementById("titleofad").value;
-    var res = input_title.match(/^[a-zA-Z0-9\.]*$/);
+    var res = input_title.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/);
     // console.log(res);
+    /*
     if (e.which === 32 || !res)
     {
         $("#alert-title").show();
@@ -84,7 +85,16 @@ $("input").on("keydown", function (e)
     {
         $("#alert-title").hide();
     }
-    return e.which !== 32;
+    */
+    if (!res)
+    {
+        $("#alert-title").show();
+    }
+    else
+    {
+        $("#alert-title").hide();
+    }
+    // return e.which !== 32;
 });
 
 </script>

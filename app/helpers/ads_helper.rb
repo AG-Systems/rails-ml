@@ -1,2 +1,2 @@
 module AdsHelper
-end
+end 

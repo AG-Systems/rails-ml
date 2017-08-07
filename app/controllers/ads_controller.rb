@@ -23,7 +23,7 @@ class AdsController < ApplicationController
     title_img = @ad.title
     img_id = @ad.id
     valid_title = true
-    if title_img.match(/\A[a-zA-Z0-9]*\z/).nil?
+    if title_img.match(/\A[a-z0-9\s]+\Z/i).nil?
         valid_title = false #if the title has anything other then a-z etc 
     else
        flash[:error] = 'Only Alphabetic and number characters are allowed'
@@ -81,7 +81,7 @@ class AdsController < ApplicationController
             feedback_results = "Try using less text "
           else
             if brightness_res.to_i > 180
-              feedback_results = "Try decresing brightness and/or contrast "
+              feedback_results = "Try decreasing brightness and/or contrast "
             elsif brightness_res.to_i < 30
               feedback_results = "Try increasing brightness and/or contrast "
             end
