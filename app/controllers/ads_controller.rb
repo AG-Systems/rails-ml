@@ -18,6 +18,7 @@ class AdsController < ApplicationController
   def error
   end
   
+
   def create
     @ad = Ad.new(post_params)
     title_img = @ad.title
@@ -64,6 +65,7 @@ class AdsController < ApplicationController
           run_result = ad_rating[Integer(ad_rating.index('RATING_CLASS')) + 12..Integer(ad_rating.index('RATING_SCORE'))-1] #Run this ad or not
           run_score = ad_rating[Integer(ad_rating.index('RATING_SCORE')) + 13..-1] # Score
           ad_type = classify[0..Integer(classify.index('('))-1] #Maybe in the future, we can use this
+          ad_type_confidence = classify[Integer(classify.index('=')) + 1..Integer(classify.index(')'))-1]
           puts "Results: " + run_result
           puts "Ad score: " + run_score
           puts "Classify: " + classify
@@ -73,85 +75,21 @@ class AdsController < ApplicationController
           #puts "Ad memorability: " + calling
           #puts "Attention Grab:" + color_status
           puts "Brightness test: " + `python db/classify_brightness.py #{image_path}`
-          temp = text_recon
-          temp = temp.gsub(/\s+/, "")
-          if temp.length > 35
-            feedback_results = "You are using way too much text "
-          elsif temp.length > 10
-            feedback_results = "Try using less text "
-          else
-            if brightness_res.to_i > 180
-              feedback_results = "Try decreasing brightness and/or contrast "
-            elsif brightness_res.to_i < 30
-              feedback_results = "Try increasing brightness and/or contrast "
-            end
-          end
-          if extract_text.to_f >= 30 and text_recon.length > 10 and temp.length >= 10 and text_size.to_f <= 1000
-            feedback_results = "Text takes up too much on your ad \n"
-          end
-          if text_size.to_f >= 20000 and extract_text.to_f <= 10
-            feedback_results = "Your text might be too small "
-          end
           puts "Ad Type: " + ad_type
+          puts "Ad Type Confidence: " + ad_type_confidence
+          feedback_results = feedback(ad_type , text_recon, extract_text, text_size, brightness_res, ad_type_confidence)
+          
           classify = classify[Integer(classify.index('=')) + 1..Integer(classify.index('=')) + 5] #Image recon
-          
-          #calling.chomp!
-          #color_status.chomp!
-          #calling = Float(calling)
-          #color_status = Float(color_status)
           """
-          if classify.to_f > 0.70
-            calling = (calling * (1.2 + (classify.to_f - 0.70)))
-
-            color_status = (color_status * (1.2 + (classify.to_f - 0.70)))
-            puts 'Confident object dect'
-          elsif classify.to_f < 0.10
-              calling = (calling * 1.2)
-
-              color_status = (color_status * 1.2)
-              puts 'Ad is too unique' 
-          else
-              calling = (calling + (Float(run_score) * 0.5))
-              
-              color_status = (color_status + (Float(run_score) * 0.5))
-          end
-          calling = String(calling)
-          color_status = String(color_status)
-          if Float(calling) > 10.0
-            calling = '10.0'
-          end
-
-          #calling = (calling.to_f)
-          #color_status = (color_status.to_f)
+          if ad_rating.to_f == 0 or ad_rating.to_f >= 9 or (ad_rating.to_f >= 5 and ad_rating.to_f <= 6)
+              new_rating = `python db/special_alg.py #{image_path} #{@ad[:id]} #{ad_type}`
+              new_rating = new_rating[Integer(new_rating.index('RATING_SCORE')) + 13..-1]
+              run_score = (run_score.to_f + Float(new_rating.to_f)) / 2
+              run_score = run_score.to_s
+              run_score = new_rating.to_f
+              puts 'New rating: ' + new_rating.to_s
+          end 
           """
-          #classify = (classify.to_f)
-          
-          #calling = String(calling)
-          #color_status = String(color_status)
-          #classify = String(classify) 
-          """
-          puts 'NEW SCORE: '
-          puts run_score
-          puts '-----------'
-          new_rating = `python db/special_alg.py #{image_path} #{@ad[:id]} #{ad_type}`
-          new_rating = new_rating[Integer(new_rating.index('RATING_SCORE')) + 13..-1]
-          run_score = (run_score.to_f + Float(new_rating.to_f)) / 2
-          run_score = run_score.to_s
-          puts new_rating
-          puts '----------------------'
-          """
-          if Float(run_score) <= 1.0 or Float(run_score) >= 9.0 
-            puts
-            puts "Score was low / high: Re-run time" 
-            temp = ad_type
-            temp = temp.gsub(/\s+/, "")
-            new_rating = `python db/special_alg.py #{image_path} #{@ad[:id]} #{temp}`
-            new_rating = new_rating[Integer(new_rating.index('RATING_SCORE')) + 13..-1]
-            #run_score = (run_score.to_f + Float(new_rating.to_f)) / 2 #Take average or just keep new score
-            run_score = run_score.to_s
-            puts "New score: "
-            puts run_score 
-          end
           #@ad.update_attributes(:feedback => calling, :rating => run_score, :recon => classify.chomp, :adtype => ad_type, :adstatus => run_result.chomp, :adcolor => color_status.chomp)
           @ad.update_attributes(:rating => run_score, :adtype => ad_type, :adstatus => run_result.chomp, :feedback => feedback_results)
           redirect_to :action => :index 
@@ -169,6 +107,61 @@ class AdsController < ApplicationController
   def show 
     @ad = Ad.find(params[:id])        
   end
+  
   helper_method :all
+  
+  private 
+  def feedback(adtype, text_recon, extract_text, text_size, brightness_res, ad_type_confidence)
+      feedback_results = ""
+      if adtype == "web site, website, internet site, site"
+          temp = text_recon
+          temp = temp.gsub(/\s+/, "")
+          if temp.length > 40
+            feedback_results = "You are using way too much text "
+          elsif temp.length > 15
+            feedback_results = "Try using less text "
+          else
+            if brightness_res.to_i > 180
+              feedback_results = "Try decreasing brightness and/or contrast "
+            elsif brightness_res.to_i < 30
+              feedback_results = "Try increasing brightness and/or contrast "
+            end
+          end
+          if extract_text.to_f >= 30 and text_recon.length > 10 and temp.length >= 10 and text_size.to_f <= 1000
+            feedback_results = "Text takes up too much on your ad "
+          end
+          if text_size.to_f >= 20000 and extract_text.to_f <= 10
+            feedback_results = "Your text might be too small "
+          end
+      elsif adtype == "sports car, sport car" or adtype.include? "car" or adtype.include? "radiator" or adtype.include? "convertible"
+          if ad_type_confidence.to_f <= 0.6
+            feedback_results = "Try zooming more onto the car or making the car more clear"
+          end
+          
+    else
+          temp = text_recon
+          temp = temp.gsub(/\s+/, "")
+          if temp.length > 40
+            feedback_results = "You are using way too much text "
+          elsif temp.length > 15
+            feedback_results = "Try using less text "
+          else
+            if brightness_res.to_i > 180
+              feedback_results = "Try decreasing brightness and/or contrast "
+            elsif brightness_res.to_i < 30
+              feedback_results = "Try increasing brightness and/or contrast "
+            end
+          end
+          if extract_text.to_f >= 30 and text_recon.length > 10 and temp.length >= 10 and text_size.to_f <= 1000
+            feedback_results = "Text takes up too much on your ad "
+          end
+          if text_size.to_f >= 20000 and extract_text.to_f <= 10
+            feedback_results = "Your text might be too small "
+          end     
+      
+    end
+    
+    return feedback_results
+  end  
 end
   
